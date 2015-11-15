@@ -1,16 +1,17 @@
-#include "CBVT Client.h"
 #include "stdafx.h"
+#include "globals.h"
+#include "CBVT Main.h"
 
-using namespace CBVTClientNS;
-
+using namespace CBVTMainNS;
 [System::STAThread]
-int run_client(array<System::String ^> ^args)
+int main(array<System::String ^> ^args)
 {
+	FreeConsole();
 	// Enabling Windows XP visual effects before any controls are created
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 	// Create the main window and run it
-	Application::Run(gcnew CBVTClient());
-
+	Application::Run(gcnew CBVTMain());
+	//Application::Run(gcnew CBVTClient());
 	return 0;
 }

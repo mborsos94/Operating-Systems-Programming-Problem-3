@@ -56,6 +56,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies />
+      <SubSystem>NotSet</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -76,19 +77,48 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CBVT Bank Insurance.cpp" />
     <ClCompile Include="CBVT Client.cpp" />
+    <ClCompile Include="CBVT DMV.cpp" />
+    <ClCompile Include="CBVT Main.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bank Insurance.h" />
+    <ClInclude Include="CBVT Bank Insurance.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="CBVT Client.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="CBVT DMV.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="CBVT Main.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Client.h" />
+    <ClInclude Include="DMV.h" />
+    <ClInclude Include="globals.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Thread.h" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CBVT Bank Insurance.resx">
+      <DependentUpon>CBVT Bank Insurance.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CBVT Client.resx">
       <DependentUpon>CBVT Client.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CBVT DMV.resx">
+      <DependentUpon>CBVT DMV.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CBVT Main.resx">
+      <DependentUpon>CBVT Main.h</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Images\Default Customer Photo.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
