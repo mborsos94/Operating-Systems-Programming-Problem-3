@@ -1,4 +1,5 @@
 #pragma once
+#include "CBVT Classes.h"
 
 namespace CBVTBankInsurNS {
 
@@ -18,6 +19,7 @@ namespace CBVTBankInsurNS {
 		CBVTBankInsurance(void)
 		{
 			InitializeComponent();
+			BankInsur aBankInsur;
 			//
 			//TODO: Add the constructor code here
 			//

@@ -1,5 +1,5 @@
-
 #pragma once
+#include "CBVT Classes.h"
 
 namespace CBVTClientNS {
 
@@ -13,12 +13,14 @@ namespace CBVTClientNS {
 	/// <summary>
 	/// Summary for CBVTClient
 	/// </summary>
+
 	public ref class CBVTClient : public System::Windows::Forms::Form
 	{
 	public:
 		CBVTClient(void)
 		{
 			InitializeComponent();
+			Client aClient;
 			//
 			//TODO: Add the constructor code here
 			//

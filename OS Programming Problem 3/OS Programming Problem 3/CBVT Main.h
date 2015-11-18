@@ -1,30 +1,8 @@
-#include "Client.h"
-#include "DMV.h"
-#include "Bank Insurance.h"
 #pragma once
 #include "CBVT Client.h"
 #include "CBVT Bank Insurance.h"
 #include "CBVT DMV.h"
-
-Client::Client()
-{
-	auto_ptr<Client> aClient(new Client(*this));
-	client_ptr = aClient;
-	client_ptr->Start();
-}
-
-Client::~Client()
-{
-
-}
-
-DWORD Client::run()
-{
-	cout << "test";
-	CBVTClient^ client = gcnew CBVTClient;
-	client->Show();
-	return 0;
-}
+#include "CBVT Classes.h"
 
 namespace CBVTMainNS {
 	using namespace System;
@@ -33,7 +11,9 @@ namespace CBVTMainNS {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-	using namespace std;
+	using namespace CBVTBankInsurNS;
+	using namespace CBVTClientNS;
+	using namespace CBVTDMVNS;
 
 	/// <summary>
 	/// Summary for CBVTMain
