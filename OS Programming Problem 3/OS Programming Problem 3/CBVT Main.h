@@ -69,6 +69,7 @@ namespace CBVTMainNS {
 
 
 	private: System::Windows::Forms::Button^  Bank_Insurance_Button;
+	private: System::Windows::Forms::StatusStrip^  statusStrip1;
 
 
 	private:
@@ -88,6 +89,7 @@ namespace CBVTMainNS {
 			this->Client_Button = (gcnew System::Windows::Forms::Button());
 			this->DMV_Button = (gcnew System::Windows::Forms::Button());
 			this->Bank_Insurance_Button = (gcnew System::Windows::Forms::Button());
+			this->statusStrip1 = (gcnew System::Windows::Forms::StatusStrip());
 			this->SuspendLayout();
 			// 
 			// Select_Server_Label
@@ -129,11 +131,20 @@ namespace CBVTMainNS {
 			this->Bank_Insurance_Button->UseVisualStyleBackColor = true;
 			this->Bank_Insurance_Button->Click += gcnew System::EventHandler(this, &CBVTMain::Bank_Insurance_Button_Click);
 			// 
+			// statusStrip1
+			// 
+			this->statusStrip1->Location = System::Drawing::Point(0, 220);
+			this->statusStrip1->Name = L"statusStrip1";
+			this->statusStrip1->Size = System::Drawing::Size(397, 22);
+			this->statusStrip1->TabIndex = 82;
+			this->statusStrip1->Text = L"statusStrip1";
+			// 
 			// CBVTMain
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(397, 242);
+			this->Controls->Add(this->statusStrip1);
 			this->Controls->Add(this->Bank_Insurance_Button);
 			this->Controls->Add(this->DMV_Button);
 			this->Controls->Add(this->Client_Button);
