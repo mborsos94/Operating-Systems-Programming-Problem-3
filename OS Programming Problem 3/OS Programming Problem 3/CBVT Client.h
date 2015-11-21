@@ -20,7 +20,6 @@ namespace CBVTClientNS {
 		CBVTClient(void)
 		{
 			InitializeComponent();
-			Client aClient;
 			//
 			//TODO: Add the constructor code here
 			//
@@ -315,12 +314,14 @@ namespace CBVTClientNS {
 			// 
 			// pictureBox1
 			// 
+			this->pictureBox1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->pictureBox1->Location = System::Drawing::Point(7, 20);
 			this->pictureBox1->Name = L"pictureBox1";
 			this->pictureBox1->Size = System::Drawing::Size(130, 138);
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox1->TabIndex = 0;
 			this->pictureBox1->TabStop = false;
+			this->pictureBox1->Click += gcnew System::EventHandler(this, &CBVTClient::pictureBox1_Click);
 			// 
 			// groupBox2
 			// 
@@ -622,6 +623,12 @@ namespace CBVTClientNS {
 		}
 	private: System::Void label1_Click(System::Object^  sender, System::EventArgs^  e) {
 	}
-	};
+	private: System::Void pictureBox1_Click(System::Object^  sender, System::EventArgs^  e) {
+				 OpenFileDialog^ loadImage = gcnew OpenFileDialog();
+				 if (loadImage->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+					 pictureBox1->Image = Image::FromFile(loadImage->FileName);
+				 }
+	}
+};
 }
 #pragma endregion

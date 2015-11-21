@@ -19,7 +19,6 @@ namespace CBVTDMVNS {
 		CBVTDMV(void)
 		{
 			InitializeComponent();
-			DMV aDMV;
 			//
 			//TODO: Add the constructor code here
 			//

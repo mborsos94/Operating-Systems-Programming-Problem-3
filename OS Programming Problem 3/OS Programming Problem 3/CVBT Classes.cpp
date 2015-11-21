@@ -46,7 +46,6 @@ Client::~Client()
 
 DWORD Client::run()
 {
-	cout << "Client";
 	return 0;
 }
 
@@ -64,7 +63,6 @@ BankInsur::~BankInsur()
 
 DWORD BankInsur::run()
 {
-	cout << "Bank / Insurance";
 	return 0;
 }
 
@@ -82,6 +80,5 @@ DMV::~DMV()
 
 DWORD DMV::run()
 {
-	cout << "DMV";
 	return 0;
 }

@@ -19,7 +19,6 @@ namespace CBVTBankInsurNS {
 		CBVTBankInsurance(void)
 		{
 			InitializeComponent();
-			BankInsur aBankInsur;
 			//
 			//TODO: Add the constructor code here
 			//

@@ -6,7 +6,7 @@ using namespace CBVTMainNS;
 [System::STAThread]
 int main(array<System::String ^> ^args)
 {
-	//FreeConsole();
+	FreeConsole();
 	// Enabling Windows XP visual effects before any controls are created
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);

@@ -61,11 +61,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Images\Default Customer Photo.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="CBVT Client.resx">
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
