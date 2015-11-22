@@ -16,6 +16,7 @@ namespace CBVTDMVNS {
 	public ref class CBVTDMV : public System::Windows::Forms::Form
 	{
 	public:
+
 		CBVTDMV(void)
 		{
 			InitializeComponent();
@@ -55,8 +56,8 @@ namespace CBVTDMVNS {
 	private: System::Windows::Forms::Label^  label7;
 	private: System::Windows::Forms::Label^  label8;
 	private: System::Windows::Forms::Label^  label9;
-	private: System::Windows::Forms::Label^  label10;
-	private: System::Windows::Forms::Label^  label11;
+
+
 	private: System::Windows::Forms::Label^  label12;
 	private: System::Windows::Forms::Label^  label13;
 	private: System::Windows::Forms::Label^  label14;
@@ -68,8 +69,8 @@ namespace CBVTDMVNS {
 	private: System::Windows::Forms::TextBox^  textBox8;
 	private: System::Windows::Forms::TextBox^  textBox9;
 	private: System::Windows::Forms::TextBox^  textBox10;
-	private: System::Windows::Forms::TextBox^  textBox11;
-	private: System::Windows::Forms::TextBox^  textBox12;
+
+
 	private: System::Windows::Forms::TextBox^  textBox13;
 	private: System::Windows::Forms::TextBox^  textBox14;
 	private: System::Windows::Forms::TextBox^  textBox15;
@@ -78,6 +79,10 @@ namespace CBVTDMVNS {
 	private: System::Windows::Forms::StatusStrip^  statusStrip1;
 	private: System::Windows::Forms::Label^  label20;
 	private: System::Windows::Forms::RichTextBox^  richTextBox1;
+	private: System::Windows::Forms::DateTimePicker^  dateTimePicker2;
+	private: System::Windows::Forms::DateTimePicker^  dateTimePicker1;
+	private: System::Windows::Forms::Label^  label11;
+	private: System::Windows::Forms::Label^  label10;
 
 	protected:
 
@@ -113,8 +118,6 @@ namespace CBVTDMVNS {
 			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->label8 = (gcnew System::Windows::Forms::Label());
 			this->label9 = (gcnew System::Windows::Forms::Label());
-			this->label10 = (gcnew System::Windows::Forms::Label());
-			this->label11 = (gcnew System::Windows::Forms::Label());
 			this->label12 = (gcnew System::Windows::Forms::Label());
 			this->label13 = (gcnew System::Windows::Forms::Label());
 			this->label14 = (gcnew System::Windows::Forms::Label());
@@ -126,8 +129,6 @@ namespace CBVTDMVNS {
 			this->textBox8 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox9 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox10 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox11 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox12 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox13 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox14 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox15 = (gcnew System::Windows::Forms::TextBox());
@@ -136,6 +137,10 @@ namespace CBVTDMVNS {
 			this->statusStrip1 = (gcnew System::Windows::Forms::StatusStrip());
 			this->label20 = (gcnew System::Windows::Forms::Label());
 			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
+			this->dateTimePicker2 = (gcnew System::Windows::Forms::DateTimePicker());
+			this->dateTimePicker1 = (gcnew System::Windows::Forms::DateTimePicker());
+			this->label11 = (gcnew System::Windows::Forms::Label());
+			this->label10 = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// listBox1
@@ -298,24 +303,6 @@ namespace CBVTDMVNS {
 			this->label9->Text = L"Vehicle Information";
 			this->label9->Click += gcnew System::EventHandler(this, &CBVTDMV::label9_Click);
 			// 
-			// label10
-			// 
-			this->label10->AutoSize = true;
-			this->label10->Location = System::Drawing::Point(247, 309);
-			this->label10->Name = L"label10";
-			this->label10->Size = System::Drawing::Size(52, 13);
-			this->label10->TabIndex = 19;
-			this->label10->Text = L"End Date";
-			// 
-			// label11
-			// 
-			this->label11->AutoSize = true;
-			this->label11->Location = System::Drawing::Point(247, 287);
-			this->label11->Name = L"label11";
-			this->label11->Size = System::Drawing::Size(55, 13);
-			this->label11->TabIndex = 20;
-			this->label11->Text = L"Start Date";
-			// 
 			// label12
 			// 
 			this->label12->AutoSize = true;
@@ -409,20 +396,6 @@ namespace CBVTDMVNS {
 			this->textBox10->Size = System::Drawing::Size(153, 20);
 			this->textBox10->TabIndex = 31;
 			// 
-			// textBox11
-			// 
-			this->textBox11->Location = System::Drawing::Point(306, 306);
-			this->textBox11->Name = L"textBox11";
-			this->textBox11->Size = System::Drawing::Size(153, 20);
-			this->textBox11->TabIndex = 32;
-			// 
-			// textBox12
-			// 
-			this->textBox12->Location = System::Drawing::Point(306, 284);
-			this->textBox12->Name = L"textBox12";
-			this->textBox12->Size = System::Drawing::Size(153, 20);
-			this->textBox12->TabIndex = 33;
-			// 
 			// textBox13
 			// 
 			this->textBox13->Location = System::Drawing::Point(467, 434);
@@ -486,11 +459,47 @@ namespace CBVTDMVNS {
 			this->richTextBox1->Text = L"This is a placeholder for potentially displaying the information found in the DB,"
 				L" there is probably a better way to do this but I am lazy";
 			// 
+			// dateTimePicker2
+			// 
+			this->dateTimePicker2->Location = System::Drawing::Point(313, 313);
+			this->dateTimePicker2->Name = L"dateTimePicker2";
+			this->dateTimePicker2->Size = System::Drawing::Size(200, 20);
+			this->dateTimePicker2->TabIndex = 89;
+			// 
+			// dateTimePicker1
+			// 
+			this->dateTimePicker1->Location = System::Drawing::Point(313, 287);
+			this->dateTimePicker1->Name = L"dateTimePicker1";
+			this->dateTimePicker1->Size = System::Drawing::Size(200, 20);
+			this->dateTimePicker1->TabIndex = 88;
+			// 
+			// label11
+			// 
+			this->label11->AutoSize = true;
+			this->label11->Location = System::Drawing::Point(247, 287);
+			this->label11->Name = L"label11";
+			this->label11->Size = System::Drawing::Size(55, 13);
+			this->label11->TabIndex = 87;
+			this->label11->Text = L"Start Date";
+			// 
+			// label10
+			// 
+			this->label10->AutoSize = true;
+			this->label10->Location = System::Drawing::Point(247, 320);
+			this->label10->Name = L"label10";
+			this->label10->Size = System::Drawing::Size(52, 13);
+			this->label10->TabIndex = 86;
+			this->label10->Text = L"End Date";
+			// 
 			// CBVTDMV
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1040, 499);
+			this->Controls->Add(this->dateTimePicker2);
+			this->Controls->Add(this->dateTimePicker1);
+			this->Controls->Add(this->label11);
+			this->Controls->Add(this->label10);
 			this->Controls->Add(this->richTextBox1);
 			this->Controls->Add(this->label20);
 			this->Controls->Add(this->statusStrip1);
@@ -499,8 +508,6 @@ namespace CBVTDMVNS {
 			this->Controls->Add(this->textBox15);
 			this->Controls->Add(this->textBox14);
 			this->Controls->Add(this->textBox13);
-			this->Controls->Add(this->textBox12);
-			this->Controls->Add(this->textBox11);
 			this->Controls->Add(this->textBox10);
 			this->Controls->Add(this->textBox9);
 			this->Controls->Add(this->textBox8);
@@ -512,8 +519,6 @@ namespace CBVTDMVNS {
 			this->Controls->Add(this->label14);
 			this->Controls->Add(this->label13);
 			this->Controls->Add(this->label12);
-			this->Controls->Add(this->label11);
-			this->Controls->Add(this->label10);
 			this->Controls->Add(this->label9);
 			this->Controls->Add(this->label8);
 			this->Controls->Add(this->label7);

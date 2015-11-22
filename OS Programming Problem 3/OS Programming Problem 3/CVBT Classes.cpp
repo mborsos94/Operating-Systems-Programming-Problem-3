@@ -1,4 +1,3 @@
-//#include "Thread.h"
 #include "CBVT Classes.h"
 
 Thread::Thread()
@@ -46,7 +45,9 @@ Client::~Client()
 
 DWORD Client::run()
 {
-	return 0;
+	while (true)
+	{
+	}
 }
 
 BankInsur::BankInsur()
@@ -63,7 +64,9 @@ BankInsur::~BankInsur()
 
 DWORD BankInsur::run()
 {
-	return 0;
+	while (true)
+	{
+	}
 }
 
 DMV::DMV()
@@ -80,5 +83,7 @@ DMV::~DMV()
 
 DWORD DMV::run()
 {
-	return 0;
+	while (true)
+	{
+	}
 }

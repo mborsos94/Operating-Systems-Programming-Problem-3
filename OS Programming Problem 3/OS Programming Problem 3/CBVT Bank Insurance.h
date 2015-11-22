@@ -18,6 +18,7 @@ namespace CBVTBankInsurNS {
 	public:
 		CBVTBankInsurance(void)
 		{
+			BankInsur aBankInsur;
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
@@ -44,8 +45,8 @@ namespace CBVTBankInsurNS {
 	private: System::Windows::Forms::TextBox^  textBox15;
 	private: System::Windows::Forms::TextBox^  textBox14;
 	private: System::Windows::Forms::TextBox^  textBox13;
-	private: System::Windows::Forms::TextBox^  textBox12;
-	private: System::Windows::Forms::TextBox^  textBox11;
+
+
 	private: System::Windows::Forms::TextBox^  textBox10;
 	private: System::Windows::Forms::TextBox^  textBox9;
 	private: System::Windows::Forms::TextBox^  textBox8;
@@ -78,6 +79,8 @@ namespace CBVTBankInsurNS {
 	private: System::Windows::Forms::Button^  button1;
 	private: System::Windows::Forms::Label^  label1;
 	private: System::Windows::Forms::ListBox^  listBox1;
+	private: System::Windows::Forms::DateTimePicker^  dateTimePicker1;
+	private: System::Windows::Forms::DateTimePicker^  dateTimePicker2;
 
 	protected:
 
@@ -148,8 +151,6 @@ namespace CBVTBankInsurNS {
 			this->textBox15 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox14 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox13 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox12 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox11 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox10 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox9 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox8 = (gcnew System::Windows::Forms::TextBox());
@@ -182,6 +183,8 @@ namespace CBVTBankInsurNS {
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->listBox1 = (gcnew System::Windows::Forms::ListBox());
+			this->dateTimePicker1 = (gcnew System::Windows::Forms::DateTimePicker());
+			this->dateTimePicker2 = (gcnew System::Windows::Forms::DateTimePicker());
 			this->SuspendLayout();
 			// 
 			// richTextBox1
@@ -246,20 +249,6 @@ namespace CBVTBankInsurNS {
 			this->textBox13->Name = L"textBox13";
 			this->textBox13->Size = System::Drawing::Size(118, 20);
 			this->textBox13->TabIndex = 76;
-			// 
-			// textBox12
-			// 
-			this->textBox12->Location = System::Drawing::Point(306, 279);
-			this->textBox12->Name = L"textBox12";
-			this->textBox12->Size = System::Drawing::Size(153, 20);
-			this->textBox12->TabIndex = 75;
-			// 
-			// textBox11
-			// 
-			this->textBox11->Location = System::Drawing::Point(306, 301);
-			this->textBox11->Name = L"textBox11";
-			this->textBox11->Size = System::Drawing::Size(153, 20);
-			this->textBox11->TabIndex = 74;
 			// 
 			// textBox10
 			// 
@@ -366,7 +355,7 @@ namespace CBVTBankInsurNS {
 			// label10
 			// 
 			this->label10->AutoSize = true;
-			this->label10->Location = System::Drawing::Point(247, 304);
+			this->label10->Location = System::Drawing::Point(247, 315);
 			this->label10->Name = L"label10";
 			this->label10->Size = System::Drawing::Size(52, 13);
 			this->label10->TabIndex = 61;
@@ -528,11 +517,27 @@ namespace CBVTBankInsurNS {
 			this->listBox1->Size = System::Drawing::Size(185, 446);
 			this->listBox1->TabIndex = 42;
 			// 
+			// dateTimePicker1
+			// 
+			this->dateTimePicker1->Location = System::Drawing::Point(313, 282);
+			this->dateTimePicker1->Name = L"dateTimePicker1";
+			this->dateTimePicker1->Size = System::Drawing::Size(200, 20);
+			this->dateTimePicker1->TabIndex = 84;
+			// 
+			// dateTimePicker2
+			// 
+			this->dateTimePicker2->Location = System::Drawing::Point(313, 308);
+			this->dateTimePicker2->Name = L"dateTimePicker2";
+			this->dateTimePicker2->Size = System::Drawing::Size(200, 20);
+			this->dateTimePicker2->TabIndex = 85;
+			// 
 			// CBVTBankInsurance
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1048, 503);
+			this->Controls->Add(this->dateTimePicker2);
+			this->Controls->Add(this->dateTimePicker1);
 			this->Controls->Add(this->richTextBox1);
 			this->Controls->Add(this->label20);
 			this->Controls->Add(this->statusStrip1);
@@ -541,8 +546,6 @@ namespace CBVTBankInsurNS {
 			this->Controls->Add(this->textBox15);
 			this->Controls->Add(this->textBox14);
 			this->Controls->Add(this->textBox13);
-			this->Controls->Add(this->textBox12);
-			this->Controls->Add(this->textBox11);
 			this->Controls->Add(this->textBox10);
 			this->Controls->Add(this->textBox9);
 			this->Controls->Add(this->textBox8);

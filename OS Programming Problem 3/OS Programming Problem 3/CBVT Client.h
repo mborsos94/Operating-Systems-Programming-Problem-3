@@ -51,10 +51,10 @@ namespace CBVTClientNS {
 	private: System::Windows::Forms::TextBox^  textBox2;
 	private: System::Windows::Forms::Label^  label1;
 	private: System::Windows::Forms::GroupBox^  groupBox2;
-	private: System::Windows::Forms::TextBox^  textBox8;
+
 	private: System::Windows::Forms::Label^  label7;
 	private: System::Windows::Forms::Label^  label6;
-	private: System::Windows::Forms::TextBox^  textBox6;
+
 	private: System::Windows::Forms::GroupBox^  groupBox3;
 	private: System::Windows::Forms::TextBox^  textBox13;
 	private: System::Windows::Forms::Label^  label13;
@@ -86,6 +86,8 @@ namespace CBVTClientNS {
 	private: System::Windows::Forms::Label^  label18;
 	private: System::Windows::Forms::TextBox^  textBox18;
 	private: System::Windows::Forms::StatusStrip^  statusStrip1;
+	private: System::Windows::Forms::DateTimePicker^  dateTimePicker2;
+	private: System::Windows::Forms::DateTimePicker^  dateTimePicker1;
 
 	protected:
 
@@ -121,10 +123,8 @@ namespace CBVTClientNS {
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
-			this->textBox8 = (gcnew System::Windows::Forms::TextBox());
 			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->label6 = (gcnew System::Windows::Forms::Label());
-			this->textBox6 = (gcnew System::Windows::Forms::TextBox());
 			this->groupBox3 = (gcnew System::Windows::Forms::GroupBox());
 			this->textBox13 = (gcnew System::Windows::Forms::TextBox());
 			this->label13 = (gcnew System::Windows::Forms::Label());
@@ -150,6 +150,8 @@ namespace CBVTClientNS {
 			this->textBox17 = (gcnew System::Windows::Forms::TextBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->statusStrip1 = (gcnew System::Windows::Forms::StatusStrip());
+			this->dateTimePicker1 = (gcnew System::Windows::Forms::DateTimePicker());
+			this->dateTimePicker2 = (gcnew System::Windows::Forms::DateTimePicker());
 			this->groupBox1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->groupBox2->SuspendLayout();
@@ -325,10 +327,10 @@ namespace CBVTClientNS {
 			// 
 			// groupBox2
 			// 
-			this->groupBox2->Controls->Add(this->textBox8);
+			this->groupBox2->Controls->Add(this->dateTimePicker2);
+			this->groupBox2->Controls->Add(this->dateTimePicker1);
 			this->groupBox2->Controls->Add(this->label7);
 			this->groupBox2->Controls->Add(this->label6);
-			this->groupBox2->Controls->Add(this->textBox6);
 			this->groupBox2->Location = System::Drawing::Point(13, 200);
 			this->groupBox2->Name = L"groupBox2";
 			this->groupBox2->Size = System::Drawing::Size(450, 100);
@@ -336,17 +338,10 @@ namespace CBVTClientNS {
 			this->groupBox2->TabStop = false;
 			this->groupBox2->Text = L"Dates of Travel";
 			// 
-			// textBox8
-			// 
-			this->textBox8->Location = System::Drawing::Point(320, 25);
-			this->textBox8->Name = L"textBox8";
-			this->textBox8->Size = System::Drawing::Size(93, 20);
-			this->textBox8->TabIndex = 15;
-			// 
 			// label7
 			// 
 			this->label7->AutoSize = true;
-			this->label7->Location = System::Drawing::Point(238, 28);
+			this->label7->Location = System::Drawing::Point(17, 55);
 			this->label7->Name = L"label7";
 			this->label7->Size = System::Drawing::Size(52, 13);
 			this->label7->TabIndex = 14;
@@ -360,13 +355,6 @@ namespace CBVTClientNS {
 			this->label6->Size = System::Drawing::Size(55, 13);
 			this->label6->TabIndex = 12;
 			this->label6->Text = L"Start Date";
-			// 
-			// textBox6
-			// 
-			this->textBox6->Location = System::Drawing::Point(94, 25);
-			this->textBox6->Name = L"textBox6";
-			this->textBox6->Size = System::Drawing::Size(93, 20);
-			this->textBox6->TabIndex = 11;
 			// 
 			// groupBox3
 			// 
@@ -583,6 +571,7 @@ namespace CBVTClientNS {
 			this->button1->TabIndex = 16;
 			this->button1->Text = L"Submit Information";
 			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &CBVTClient::button1_Click);
 			// 
 			// statusStrip1
 			// 
@@ -591,6 +580,20 @@ namespace CBVTClientNS {
 			this->statusStrip1->Size = System::Drawing::Size(1409, 22);
 			this->statusStrip1->TabIndex = 82;
 			this->statusStrip1->Text = L"statusStrip1";
+			// 
+			// dateTimePicker1
+			// 
+			this->dateTimePicker1->Location = System::Drawing::Point(78, 22);
+			this->dateTimePicker1->Name = L"dateTimePicker1";
+			this->dateTimePicker1->Size = System::Drawing::Size(200, 20);
+			this->dateTimePicker1->TabIndex = 16;
+			// 
+			// dateTimePicker2
+			// 
+			this->dateTimePicker2->Location = System::Drawing::Point(78, 49);
+			this->dateTimePicker2->Name = L"dateTimePicker2";
+			this->dateTimePicker2->Size = System::Drawing::Size(200, 20);
+			this->dateTimePicker2->TabIndex = 17;
 			// 
 			// CBVTClient
 			// 
@@ -629,6 +632,12 @@ namespace CBVTClientNS {
 					 pictureBox1->Image = Image::FromFile(loadImage->FileName);
 				 }
 	}
+private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+			 Client aClient;
+			 MessageBox::Show("Request submitted");
+			 aClient.Stop();
+			 this->Close();
+}
 };
 }
 #pragma endregion
