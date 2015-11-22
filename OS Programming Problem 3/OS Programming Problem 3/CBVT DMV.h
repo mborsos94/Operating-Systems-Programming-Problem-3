@@ -71,11 +71,11 @@ namespace CBVTDMVNS {
 	private: System::Windows::Forms::TextBox^  textBox10;
 
 
-	private: System::Windows::Forms::TextBox^  textBox13;
+
 	private: System::Windows::Forms::TextBox^  textBox14;
 	private: System::Windows::Forms::TextBox^  textBox15;
 	private: System::Windows::Forms::Button^  button3;
-	private: System::Windows::Forms::TextBox^  textBox16;
+
 	private: System::Windows::Forms::StatusStrip^  statusStrip1;
 	private: System::Windows::Forms::Label^  label20;
 	private: System::Windows::Forms::RichTextBox^  richTextBox1;
@@ -83,6 +83,8 @@ namespace CBVTDMVNS {
 	private: System::Windows::Forms::DateTimePicker^  dateTimePicker1;
 	private: System::Windows::Forms::Label^  label11;
 	private: System::Windows::Forms::Label^  label10;
+	private: System::Windows::Forms::MaskedTextBox^  zip;
+	private: System::Windows::Forms::MaskedTextBox^  maskedTextBox1;
 
 	protected:
 
@@ -129,11 +131,9 @@ namespace CBVTDMVNS {
 			this->textBox8 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox9 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox10 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox13 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox14 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox15 = (gcnew System::Windows::Forms::TextBox());
 			this->button3 = (gcnew System::Windows::Forms::Button());
-			this->textBox16 = (gcnew System::Windows::Forms::TextBox());
 			this->statusStrip1 = (gcnew System::Windows::Forms::StatusStrip());
 			this->label20 = (gcnew System::Windows::Forms::Label());
 			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
@@ -141,6 +141,8 @@ namespace CBVTDMVNS {
 			this->dateTimePicker1 = (gcnew System::Windows::Forms::DateTimePicker());
 			this->label11 = (gcnew System::Windows::Forms::Label());
 			this->label10 = (gcnew System::Windows::Forms::Label());
+			this->zip = (gcnew System::Windows::Forms::MaskedTextBox());
+			this->maskedTextBox1 = (gcnew System::Windows::Forms::MaskedTextBox());
 			this->SuspendLayout();
 			// 
 			// listBox1
@@ -396,13 +398,6 @@ namespace CBVTDMVNS {
 			this->textBox10->Size = System::Drawing::Size(153, 20);
 			this->textBox10->TabIndex = 31;
 			// 
-			// textBox13
-			// 
-			this->textBox13->Location = System::Drawing::Point(467, 434);
-			this->textBox13->Name = L"textBox13";
-			this->textBox13->Size = System::Drawing::Size(118, 20);
-			this->textBox13->TabIndex = 34;
-			// 
 			// textBox14
 			// 
 			this->textBox14->Location = System::Drawing::Point(467, 408);
@@ -425,13 +420,6 @@ namespace CBVTDMVNS {
 			this->button3->TabIndex = 37;
 			this->button3->Text = L"Search for Matching VIN";
 			this->button3->UseVisualStyleBackColor = true;
-			// 
-			// textBox16
-			// 
-			this->textBox16->Location = System::Drawing::Point(275, 224);
-			this->textBox16->Name = L"textBox16";
-			this->textBox16->Size = System::Drawing::Size(100, 20);
-			this->textBox16->TabIndex = 38;
 			// 
 			// statusStrip1
 			// 
@@ -491,11 +479,29 @@ namespace CBVTDMVNS {
 			this->label10->TabIndex = 86;
 			this->label10->Text = L"End Date";
 			// 
+			// zip
+			// 
+			this->zip->Location = System::Drawing::Point(288, 224);
+			this->zip->Mask = L"00000-9999";
+			this->zip->Name = L"zip";
+			this->zip->Size = System::Drawing::Size(100, 20);
+			this->zip->TabIndex = 90;
+			// 
+			// maskedTextBox1
+			// 
+			this->maskedTextBox1->Location = System::Drawing::Point(467, 429);
+			this->maskedTextBox1->Mask = L"0000";
+			this->maskedTextBox1->Name = L"maskedTextBox1";
+			this->maskedTextBox1->Size = System::Drawing::Size(100, 20);
+			this->maskedTextBox1->TabIndex = 91;
+			// 
 			// CBVTDMV
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1040, 499);
+			this->Controls->Add(this->maskedTextBox1);
+			this->Controls->Add(this->zip);
 			this->Controls->Add(this->dateTimePicker2);
 			this->Controls->Add(this->dateTimePicker1);
 			this->Controls->Add(this->label11);
@@ -503,11 +509,9 @@ namespace CBVTDMVNS {
 			this->Controls->Add(this->richTextBox1);
 			this->Controls->Add(this->label20);
 			this->Controls->Add(this->statusStrip1);
-			this->Controls->Add(this->textBox16);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->textBox15);
 			this->Controls->Add(this->textBox14);
-			this->Controls->Add(this->textBox13);
 			this->Controls->Add(this->textBox10);
 			this->Controls->Add(this->textBox9);
 			this->Controls->Add(this->textBox8);

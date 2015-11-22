@@ -20,6 +20,15 @@ namespace CBVTClientNS {
 		CBVTClient(void)
 		{
 			InitializeComponent();
+			time_t theTime = time(NULL);
+			struct tm *aTime = localtime(&theTime);
+			int currYear = aTime->tm_year + 1900;
+			for (int i = 1900; i <= currYear + 1; i++)
+			{
+				this->carYear->Items->Add(i);
+			}
+
+			this->carYear->SelectedIndex = currYear - 1900;
 			//
 			//TODO: Add the constructor code here
 			//
@@ -115,7 +124,7 @@ namespace CBVTClientNS {
 
 
 
-	private: System::Windows::Forms::TextBox^  zip;
+
 	private: System::Windows::Forms::Label^  stateProvinceLbl;
 
 
@@ -130,6 +139,7 @@ namespace CBVTClientNS {
 
 	private: System::Windows::Forms::DateTimePicker^  travelStart;
 private: System::Windows::Forms::ComboBox^  carYear;
+private: System::Windows::Forms::MaskedTextBox^  zip;
 
 
 	protected:
@@ -149,7 +159,6 @@ private: System::Windows::Forms::ComboBox^  carYear;
 		{
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->zipLbl = (gcnew System::Windows::Forms::Label());
-			this->zip = (gcnew System::Windows::Forms::TextBox());
 			this->stateProvinceLbl = (gcnew System::Windows::Forms::Label());
 			this->stateProvince = (gcnew System::Windows::Forms::TextBox());
 			this->cityLbl = (gcnew System::Windows::Forms::Label());
@@ -171,6 +180,7 @@ private: System::Windows::Forms::ComboBox^  carYear;
 			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->groupBox3 = (gcnew System::Windows::Forms::GroupBox());
+			this->carYear = (gcnew System::Windows::Forms::ComboBox());
 			this->carModel = (gcnew System::Windows::Forms::TextBox());
 			this->carModelLbl = (gcnew System::Windows::Forms::Label());
 			this->carMake = (gcnew System::Windows::Forms::TextBox());
@@ -194,18 +204,7 @@ private: System::Windows::Forms::ComboBox^  carYear;
 			this->insurName = (gcnew System::Windows::Forms::TextBox());
 			this->submitInfoButton = (gcnew System::Windows::Forms::Button());
 			this->statusStrip1 = (gcnew System::Windows::Forms::StatusStrip());
-			this->carYear = (gcnew System::Windows::Forms::ComboBox());
-
-			time_t theTime = time(NULL);
-			struct tm *aTime = localtime(&theTime);
-			int currYear = aTime->tm_year + 1900;
-			for (int i = 1900; i <= currYear + 1; i++)
-			{
-				this->carYear->Items->Add(i);
-			}
-
-			this->carYear->SelectedIndex = currYear - 1900;
-
+			this->zip = (gcnew System::Windows::Forms::MaskedTextBox());
 			this->groupBox1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->clientPhoto))->BeginInit();
 			this->groupBox2->SuspendLayout();
@@ -216,8 +215,8 @@ private: System::Windows::Forms::ComboBox^  carYear;
 			// 
 			// groupBox1
 			// 
-			this->groupBox1->Controls->Add(this->zipLbl);
 			this->groupBox1->Controls->Add(this->zip);
+			this->groupBox1->Controls->Add(this->zipLbl);
 			this->groupBox1->Controls->Add(this->stateProvinceLbl);
 			this->groupBox1->Controls->Add(this->stateProvince);
 			this->groupBox1->Controls->Add(this->cityLbl);
@@ -248,13 +247,6 @@ private: System::Windows::Forms::ComboBox^  carYear;
 			this->zipLbl->Size = System::Drawing::Size(22, 13);
 			this->zipLbl->TabIndex = 16;
 			this->zipLbl->Text = L"Zip";
-			// 
-			// zip
-			// 
-			this->zip->Location = System::Drawing::Point(1227, 122);
-			this->zip->Name = L"zip";
-			this->zip->Size = System::Drawing::Size(133, 20);
-			this->zip->TabIndex = 15;
 			// 
 			// stateProvinceLbl
 			// 
@@ -444,6 +436,15 @@ private: System::Windows::Forms::ComboBox^  carYear;
 			this->groupBox3->TabIndex = 2;
 			this->groupBox3->TabStop = false;
 			this->groupBox3->Text = L"Vehicle Information";
+			// 
+			// carYear
+			// 
+			this->carYear->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->carYear->FormattingEnabled = true;
+			this->carYear->Location = System::Drawing::Point(531, 55);
+			this->carYear->Name = L"carYear";
+			this->carYear->Size = System::Drawing::Size(121, 21);
+			this->carYear->TabIndex = 24;
 			// 
 			// carModel
 			// 
@@ -642,14 +643,13 @@ private: System::Windows::Forms::ComboBox^  carYear;
 			this->statusStrip1->TabIndex = 82;
 			this->statusStrip1->Text = L"statusStrip1";
 			// 
-			// carYear
+			// zip
 			// 
-			this->carYear->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->carYear->FormattingEnabled = true;
-			this->carYear->Location = System::Drawing::Point(531, 55);
-			this->carYear->Name = L"carYear";
-			this->carYear->Size = System::Drawing::Size(121, 21);
-			this->carYear->TabIndex = 24;
+			this->zip->Location = System::Drawing::Point(1219, 122);
+			this->zip->Mask = L"00000-9999";
+			this->zip->Name = L"zip";
+			this->zip->Size = System::Drawing::Size(100, 20);
+			this->zip->TabIndex = 87;
 			// 
 			// CBVTClient
 			// 
@@ -716,7 +716,7 @@ private: System::Windows::Forms::ComboBox^  carYear;
 				 if (stateProvince->Text->Length == 0)
 					 missingInfo = missingInfo + " " + stateProvinceLbl->Text + ",";
 
-				 if (zip->Text->Length == 0)
+				 if (zip->Text->Contains(" "))
 					 missingInfo = missingInfo + " " + zipLbl->Text + ",";
 
 				 if (registrationNr->Text->Length == 0)
