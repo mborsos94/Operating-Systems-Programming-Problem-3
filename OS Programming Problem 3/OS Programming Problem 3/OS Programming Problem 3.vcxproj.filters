@@ -30,6 +30,9 @@
     <ClCompile Include="CBVT Bank Insurance.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CVBT Classes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CBVT Client.h">
@@ -50,29 +53,24 @@
     <ClInclude Include="Thread.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Client.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Bank Insurance.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DMV.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="globals.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Images\Default Customer Photo.png">
-      <Filter>Resource Files</Filter>
-    </Image>
+    <ClInclude Include="CBVT Classes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CBVT Client.resx">
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
     <EmbeddedResource Include="CBVT Main.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CBVT Bank Insurance.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CBVT DMV.resx">
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
   </ItemGroup>

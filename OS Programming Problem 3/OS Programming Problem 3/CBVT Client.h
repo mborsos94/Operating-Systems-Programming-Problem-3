@@ -1,5 +1,5 @@
-
 #pragma once
+#include "CBVT Classes.h"
 
 namespace CBVTClientNS {
 
@@ -13,12 +13,22 @@ namespace CBVTClientNS {
 	/// <summary>
 	/// Summary for CBVTClient
 	/// </summary>
+
 	public ref class CBVTClient : public System::Windows::Forms::Form
 	{
 	public:
 		CBVTClient(void)
 		{
 			InitializeComponent();
+			time_t theTime = time(NULL);
+			struct tm *aTime = localtime(&theTime);
+			int currYear = aTime->tm_year + 1900;
+			for (int i = 1900; i <= currYear + 1; i++)
+			{
+				this->carYear->Items->Add(i);
+			}
+
+			this->carYear->SelectedIndex = currYear - 1900;
 			//
 			//TODO: Add the constructor code here
 			//
@@ -36,54 +46,101 @@ namespace CBVTClientNS {
 			}
 		}
 	private: System::Windows::Forms::GroupBox^  groupBox1;
+	private: System::Windows::Forms::TextBox^  firstName;
 	protected:
 
-	private: System::Windows::Forms::TextBox^  textBox1;
-	private: System::Windows::Forms::PictureBox^  pictureBox1;
-	private: System::Windows::Forms::Label^  label5;
-	private: System::Windows::Forms::TextBox^  textBox5;
-	private: System::Windows::Forms::Label^  label4;
-	private: System::Windows::Forms::TextBox^  textBox4;
-	private: System::Windows::Forms::Label^  label3;
-	private: System::Windows::Forms::TextBox^  textBox3;
-	private: System::Windows::Forms::Label^  label2;
-	private: System::Windows::Forms::TextBox^  textBox2;
-	private: System::Windows::Forms::Label^  label1;
+
+	private: System::Windows::Forms::PictureBox^  clientPhoto;
+	private: System::Windows::Forms::Label^  licenseNrLbl;
+
+
+	private: System::Windows::Forms::TextBox^  licenseNr;
+	private: System::Windows::Forms::Label^  passportNrLbl;
+
+
+	private: System::Windows::Forms::TextBox^  passportNr;
+	private: System::Windows::Forms::Label^  addressLbl;
+
+
+	private: System::Windows::Forms::TextBox^  address;
+	private: System::Windows::Forms::Label^  lastNameLbl;
+
+
+
+	private: System::Windows::Forms::TextBox^  lastName;
+	private: System::Windows::Forms::Label^  firstNameLbl;
+
+
+
 	private: System::Windows::Forms::GroupBox^  groupBox2;
-	private: System::Windows::Forms::TextBox^  textBox8;
+
 	private: System::Windows::Forms::Label^  label7;
 	private: System::Windows::Forms::Label^  label6;
-	private: System::Windows::Forms::TextBox^  textBox6;
+
 	private: System::Windows::Forms::GroupBox^  groupBox3;
-	private: System::Windows::Forms::TextBox^  textBox13;
-	private: System::Windows::Forms::Label^  label13;
-	private: System::Windows::Forms::TextBox^  textBox12;
-	private: System::Windows::Forms::Label^  label12;
-	private: System::Windows::Forms::TextBox^  textBox11;
-	private: System::Windows::Forms::Label^  label11;
-	private: System::Windows::Forms::TextBox^  textBox10;
-	private: System::Windows::Forms::Label^  label8;
-	private: System::Windows::Forms::Label^  label10;
-	private: System::Windows::Forms::TextBox^  textBox7;
-	private: System::Windows::Forms::TextBox^  textBox9;
-	private: System::Windows::Forms::Label^  label9;
+	private: System::Windows::Forms::TextBox^  carModel;
+	private: System::Windows::Forms::Label^  carModelLbl;
+
+
+	private: System::Windows::Forms::TextBox^  carMake;
+	private: System::Windows::Forms::Label^  carMakeLbl;
+
+
+	private: System::Windows::Forms::TextBox^  carColor;
+	private: System::Windows::Forms::Label^  carColorLbl;
+
+
+
+	private: System::Windows::Forms::Label^  registrationNrLbl;
+	private: System::Windows::Forms::Label^  carYearLbl;
+
+
+
+	private: System::Windows::Forms::TextBox^  registrationNr;
+	private: System::Windows::Forms::TextBox^  vinNr;
+	private: System::Windows::Forms::Label^  vinNrLbl;
+
+
+
 	private: System::Windows::Forms::GroupBox^  groupBox4;
-	private: System::Windows::Forms::Label^  label15;
-	private: System::Windows::Forms::TextBox^  textBox15;
-	private: System::Windows::Forms::Label^  label14;
-	private: System::Windows::Forms::TextBox^  textBox14;
+	private: System::Windows::Forms::Label^  loanNrLbl;
+
+	private: System::Windows::Forms::TextBox^  loanNr;
+	private: System::Windows::Forms::Label^  bankNameLbl;
+
+
+	private: System::Windows::Forms::TextBox^  bankName;
+
 	private: System::Windows::Forms::GroupBox^  groupBox5;
-	private: System::Windows::Forms::Label^  label16;
-	private: System::Windows::Forms::TextBox^  textBox16;
-	private: System::Windows::Forms::Label^  label17;
-	private: System::Windows::Forms::TextBox^  textBox17;
-	private: System::Windows::Forms::Button^  button1;
-	private: System::Windows::Forms::Label^  label19;
-	private: System::Windows::Forms::TextBox^  textBox19;
-	private: System::Windows::Forms::Label^  label20;
-	private: System::Windows::Forms::TextBox^  textBox20;
-	private: System::Windows::Forms::Label^  label18;
-	private: System::Windows::Forms::TextBox^  textBox18;
+	private: System::Windows::Forms::Label^  policyNrLbl;
+
+	private: System::Windows::Forms::TextBox^  policyNr;
+	private: System::Windows::Forms::Label^  insurNameLbl;
+
+
+	private: System::Windows::Forms::TextBox^  insurName;
+	private: System::Windows::Forms::Button^  submitInfoButton;
+	private: System::Windows::Forms::Label^  zipLbl;
+
+
+
+
+	private: System::Windows::Forms::Label^  stateProvinceLbl;
+
+
+	private: System::Windows::Forms::TextBox^  stateProvince;
+	private: System::Windows::Forms::Label^  cityLbl;
+
+
+	private: System::Windows::Forms::TextBox^  city;
+
+	private: System::Windows::Forms::StatusStrip^  statusStrip1;
+	private: System::Windows::Forms::DateTimePicker^  travelEnd;
+
+	private: System::Windows::Forms::DateTimePicker^  travelStart;
+private: System::Windows::Forms::ComboBox^  carYear;
+private: System::Windows::Forms::MaskedTextBox^  zip;
+
 
 	protected:
 
@@ -101,54 +158,55 @@ namespace CBVTClientNS {
 		void InitializeComponent(void)
 		{
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
-			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
-			this->label4 = (gcnew System::Windows::Forms::Label());
-			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
-			this->label5 = (gcnew System::Windows::Forms::Label());
-			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
+			this->zipLbl = (gcnew System::Windows::Forms::Label());
+			this->stateProvinceLbl = (gcnew System::Windows::Forms::Label());
+			this->stateProvince = (gcnew System::Windows::Forms::TextBox());
+			this->cityLbl = (gcnew System::Windows::Forms::Label());
+			this->city = (gcnew System::Windows::Forms::TextBox());
+			this->licenseNrLbl = (gcnew System::Windows::Forms::Label());
+			this->licenseNr = (gcnew System::Windows::Forms::TextBox());
+			this->passportNrLbl = (gcnew System::Windows::Forms::Label());
+			this->passportNr = (gcnew System::Windows::Forms::TextBox());
+			this->addressLbl = (gcnew System::Windows::Forms::Label());
+			this->address = (gcnew System::Windows::Forms::TextBox());
+			this->lastNameLbl = (gcnew System::Windows::Forms::Label());
+			this->lastName = (gcnew System::Windows::Forms::TextBox());
+			this->firstNameLbl = (gcnew System::Windows::Forms::Label());
+			this->firstName = (gcnew System::Windows::Forms::TextBox());
+			this->clientPhoto = (gcnew System::Windows::Forms::PictureBox());
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
-			this->label6 = (gcnew System::Windows::Forms::Label());
-			this->textBox6 = (gcnew System::Windows::Forms::TextBox());
+			this->travelEnd = (gcnew System::Windows::Forms::DateTimePicker());
+			this->travelStart = (gcnew System::Windows::Forms::DateTimePicker());
 			this->label7 = (gcnew System::Windows::Forms::Label());
-			this->textBox8 = (gcnew System::Windows::Forms::TextBox());
+			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->groupBox3 = (gcnew System::Windows::Forms::GroupBox());
-			this->label8 = (gcnew System::Windows::Forms::Label());
-			this->textBox7 = (gcnew System::Windows::Forms::TextBox());
-			this->label9 = (gcnew System::Windows::Forms::Label());
-			this->textBox9 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox10 = (gcnew System::Windows::Forms::TextBox());
-			this->label10 = (gcnew System::Windows::Forms::Label());
-			this->textBox11 = (gcnew System::Windows::Forms::TextBox());
-			this->label11 = (gcnew System::Windows::Forms::Label());
-			this->textBox12 = (gcnew System::Windows::Forms::TextBox());
-			this->label12 = (gcnew System::Windows::Forms::Label());
-			this->textBox13 = (gcnew System::Windows::Forms::TextBox());
-			this->label13 = (gcnew System::Windows::Forms::Label());
+			this->carYear = (gcnew System::Windows::Forms::ComboBox());
+			this->carModel = (gcnew System::Windows::Forms::TextBox());
+			this->carModelLbl = (gcnew System::Windows::Forms::Label());
+			this->carMake = (gcnew System::Windows::Forms::TextBox());
+			this->carMakeLbl = (gcnew System::Windows::Forms::Label());
+			this->carColor = (gcnew System::Windows::Forms::TextBox());
+			this->carColorLbl = (gcnew System::Windows::Forms::Label());
+			this->registrationNrLbl = (gcnew System::Windows::Forms::Label());
+			this->carYearLbl = (gcnew System::Windows::Forms::Label());
+			this->registrationNr = (gcnew System::Windows::Forms::TextBox());
+			this->vinNr = (gcnew System::Windows::Forms::TextBox());
+			this->vinNrLbl = (gcnew System::Windows::Forms::Label());
 			this->groupBox4 = (gcnew System::Windows::Forms::GroupBox());
-			this->label14 = (gcnew System::Windows::Forms::Label());
-			this->textBox14 = (gcnew System::Windows::Forms::TextBox());
-			this->label15 = (gcnew System::Windows::Forms::Label());
-			this->textBox15 = (gcnew System::Windows::Forms::TextBox());
+			this->loanNrLbl = (gcnew System::Windows::Forms::Label());
+			this->loanNr = (gcnew System::Windows::Forms::TextBox());
+			this->bankNameLbl = (gcnew System::Windows::Forms::Label());
+			this->bankName = (gcnew System::Windows::Forms::TextBox());
 			this->groupBox5 = (gcnew System::Windows::Forms::GroupBox());
-			this->label16 = (gcnew System::Windows::Forms::Label());
-			this->textBox16 = (gcnew System::Windows::Forms::TextBox());
-			this->label17 = (gcnew System::Windows::Forms::Label());
-			this->textBox17 = (gcnew System::Windows::Forms::TextBox());
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->label18 = (gcnew System::Windows::Forms::Label());
-			this->textBox18 = (gcnew System::Windows::Forms::TextBox());
-			this->label19 = (gcnew System::Windows::Forms::Label());
-			this->textBox19 = (gcnew System::Windows::Forms::TextBox());
-			this->label20 = (gcnew System::Windows::Forms::Label());
-			this->textBox20 = (gcnew System::Windows::Forms::TextBox());
+			this->policyNrLbl = (gcnew System::Windows::Forms::Label());
+			this->policyNr = (gcnew System::Windows::Forms::TextBox());
+			this->insurNameLbl = (gcnew System::Windows::Forms::Label());
+			this->insurName = (gcnew System::Windows::Forms::TextBox());
+			this->submitInfoButton = (gcnew System::Windows::Forms::Button());
+			this->statusStrip1 = (gcnew System::Windows::Forms::StatusStrip());
+			this->zip = (gcnew System::Windows::Forms::MaskedTextBox());
 			this->groupBox1->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->clientPhoto))->BeginInit();
 			this->groupBox2->SuspendLayout();
 			this->groupBox3->SuspendLayout();
 			this->groupBox4->SuspendLayout();
@@ -157,23 +215,23 @@ namespace CBVTClientNS {
 			// 
 			// groupBox1
 			// 
-			this->groupBox1->Controls->Add(this->label19);
-			this->groupBox1->Controls->Add(this->textBox19);
-			this->groupBox1->Controls->Add(this->label20);
-			this->groupBox1->Controls->Add(this->textBox20);
-			this->groupBox1->Controls->Add(this->label18);
-			this->groupBox1->Controls->Add(this->textBox18);
-			this->groupBox1->Controls->Add(this->label5);
-			this->groupBox1->Controls->Add(this->textBox5);
-			this->groupBox1->Controls->Add(this->label4);
-			this->groupBox1->Controls->Add(this->textBox4);
-			this->groupBox1->Controls->Add(this->label3);
-			this->groupBox1->Controls->Add(this->textBox3);
-			this->groupBox1->Controls->Add(this->label2);
-			this->groupBox1->Controls->Add(this->textBox2);
-			this->groupBox1->Controls->Add(this->label1);
-			this->groupBox1->Controls->Add(this->textBox1);
-			this->groupBox1->Controls->Add(this->pictureBox1);
+			this->groupBox1->Controls->Add(this->zip);
+			this->groupBox1->Controls->Add(this->zipLbl);
+			this->groupBox1->Controls->Add(this->stateProvinceLbl);
+			this->groupBox1->Controls->Add(this->stateProvince);
+			this->groupBox1->Controls->Add(this->cityLbl);
+			this->groupBox1->Controls->Add(this->city);
+			this->groupBox1->Controls->Add(this->licenseNrLbl);
+			this->groupBox1->Controls->Add(this->licenseNr);
+			this->groupBox1->Controls->Add(this->passportNrLbl);
+			this->groupBox1->Controls->Add(this->passportNr);
+			this->groupBox1->Controls->Add(this->addressLbl);
+			this->groupBox1->Controls->Add(this->address);
+			this->groupBox1->Controls->Add(this->lastNameLbl);
+			this->groupBox1->Controls->Add(this->lastName);
+			this->groupBox1->Controls->Add(this->firstNameLbl);
+			this->groupBox1->Controls->Add(this->firstName);
+			this->groupBox1->Controls->Add(this->clientPhoto);
 			this->groupBox1->Location = System::Drawing::Point(13, 13);
 			this->groupBox1->Name = L"groupBox1";
 			this->groupBox1->Size = System::Drawing::Size(1384, 180);
@@ -181,107 +239,173 @@ namespace CBVTClientNS {
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Client Information";
 			// 
-			// textBox1
+			// zipLbl
 			// 
-			this->textBox1->Location = System::Drawing::Point(315, 20);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(170, 20);
-			this->textBox1->TabIndex = 1;
+			this->zipLbl->AutoSize = true;
+			this->zipLbl->Location = System::Drawing::Point(1181, 125);
+			this->zipLbl->Name = L"zipLbl";
+			this->zipLbl->Size = System::Drawing::Size(22, 13);
+			this->zipLbl->TabIndex = 16;
+			this->zipLbl->Text = L"Zip";
 			// 
-			// pictureBox1
+			// stateProvinceLbl
 			// 
-			this->pictureBox1->Location = System::Drawing::Point(7, 20);
-			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(130, 138);
-			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
-			this->pictureBox1->TabIndex = 0;
-			this->pictureBox1->TabStop = false;
+			this->stateProvinceLbl->AutoSize = true;
+			this->stateProvinceLbl->Location = System::Drawing::Point(856, 125);
+			this->stateProvinceLbl->Name = L"stateProvinceLbl";
+			this->stateProvinceLbl->Size = System::Drawing::Size(85, 13);
+			this->stateProvinceLbl->TabIndex = 14;
+			this->stateProvinceLbl->Text = L"State / Province";
 			// 
-			// label1
+			// stateProvince
 			// 
-			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(238, 20);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(57, 13);
-			this->label1->TabIndex = 2;
-			this->label1->Text = L"First Name";
+			this->stateProvince->Location = System::Drawing::Point(963, 122);
+			this->stateProvince->Name = L"stateProvince";
+			this->stateProvince->Size = System::Drawing::Size(192, 20);
+			this->stateProvince->TabIndex = 13;
 			// 
-			// label2
+			// cityLbl
 			// 
-			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(521, 20);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(58, 13);
-			this->label2->TabIndex = 4;
-			this->label2->Text = L"Last Name";
+			this->cityLbl->AutoSize = true;
+			this->cityLbl->Location = System::Drawing::Point(564, 125);
+			this->cityLbl->Name = L"cityLbl";
+			this->cityLbl->Size = System::Drawing::Size(24, 13);
+			this->cityLbl->TabIndex = 12;
+			this->cityLbl->Text = L"City";
 			// 
-			// textBox2
+			// city
 			// 
-			this->textBox2->Location = System::Drawing::Point(598, 20);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(192, 20);
-			this->textBox2->TabIndex = 3;
+			this->city->Location = System::Drawing::Point(609, 122);
+			this->city->Name = L"city";
+			this->city->Size = System::Drawing::Size(192, 20);
+			this->city->TabIndex = 11;
 			// 
-			// label3
+			// licenseNrLbl
 			// 
-			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(238, 125);
-			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(45, 13);
-			this->label3->TabIndex = 6;
-			this->label3->Text = L"Address";
+			this->licenseNrLbl->AutoSize = true;
+			this->licenseNrLbl->Location = System::Drawing::Point(238, 90);
+			this->licenseNrLbl->Name = L"licenseNrLbl";
+			this->licenseNrLbl->Size = System::Drawing::Size(122, 13);
+			this->licenseNrLbl->TabIndex = 10;
+			this->licenseNrLbl->Text = L"Driver\'s License Number";
 			// 
-			// textBox3
+			// licenseNr
 			// 
-			this->textBox3->Location = System::Drawing::Point(314, 122);
-			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(192, 20);
-			this->textBox3->TabIndex = 5;
+			this->licenseNr->Location = System::Drawing::Point(385, 87);
+			this->licenseNr->Name = L"licenseNr";
+			this->licenseNr->Size = System::Drawing::Size(194, 20);
+			this->licenseNr->TabIndex = 9;
 			// 
-			// label4
+			// passportNrLbl
 			// 
-			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(617, 90);
-			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(88, 13);
-			this->label4->TabIndex = 8;
-			this->label4->Text = L"Passport Number";
+			this->passportNrLbl->AutoSize = true;
+			this->passportNrLbl->Location = System::Drawing::Point(617, 90);
+			this->passportNrLbl->Name = L"passportNrLbl";
+			this->passportNrLbl->Size = System::Drawing::Size(88, 13);
+			this->passportNrLbl->TabIndex = 8;
+			this->passportNrLbl->Text = L"Passport Number";
 			// 
-			// textBox4
+			// passportNr
 			// 
-			this->textBox4->Location = System::Drawing::Point(725, 87);
-			this->textBox4->Name = L"textBox4";
-			this->textBox4->Size = System::Drawing::Size(199, 20);
-			this->textBox4->TabIndex = 7;
+			this->passportNr->Location = System::Drawing::Point(725, 87);
+			this->passportNr->Name = L"passportNr";
+			this->passportNr->Size = System::Drawing::Size(199, 20);
+			this->passportNr->TabIndex = 7;
 			// 
-			// label5
+			// addressLbl
 			// 
-			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(238, 90);
-			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(122, 13);
-			this->label5->TabIndex = 10;
-			this->label5->Text = L"Driver\'s License Number";
+			this->addressLbl->AutoSize = true;
+			this->addressLbl->Location = System::Drawing::Point(238, 125);
+			this->addressLbl->Name = L"addressLbl";
+			this->addressLbl->Size = System::Drawing::Size(45, 13);
+			this->addressLbl->TabIndex = 6;
+			this->addressLbl->Text = L"Address";
 			// 
-			// textBox5
+			// address
 			// 
-			this->textBox5->Location = System::Drawing::Point(385, 87);
-			this->textBox5->Name = L"textBox5";
-			this->textBox5->Size = System::Drawing::Size(194, 20);
-			this->textBox5->TabIndex = 9;
+			this->address->Location = System::Drawing::Point(314, 122);
+			this->address->Name = L"address";
+			this->address->Size = System::Drawing::Size(192, 20);
+			this->address->TabIndex = 5;
+			// 
+			// lastNameLbl
+			// 
+			this->lastNameLbl->AutoSize = true;
+			this->lastNameLbl->Location = System::Drawing::Point(521, 20);
+			this->lastNameLbl->Name = L"lastNameLbl";
+			this->lastNameLbl->Size = System::Drawing::Size(58, 13);
+			this->lastNameLbl->TabIndex = 4;
+			this->lastNameLbl->Text = L"Last Name";
+			// 
+			// lastName
+			// 
+			this->lastName->Location = System::Drawing::Point(598, 20);
+			this->lastName->Name = L"lastName";
+			this->lastName->Size = System::Drawing::Size(192, 20);
+			this->lastName->TabIndex = 3;
+			// 
+			// firstNameLbl
+			// 
+			this->firstNameLbl->AutoSize = true;
+			this->firstNameLbl->Location = System::Drawing::Point(238, 20);
+			this->firstNameLbl->Name = L"firstNameLbl";
+			this->firstNameLbl->Size = System::Drawing::Size(57, 13);
+			this->firstNameLbl->TabIndex = 2;
+			this->firstNameLbl->Text = L"First Name";
+			// 
+			// firstName
+			// 
+			this->firstName->Location = System::Drawing::Point(315, 20);
+			this->firstName->Name = L"firstName";
+			this->firstName->Size = System::Drawing::Size(170, 20);
+			this->firstName->TabIndex = 1;
+			// 
+			// clientPhoto
+			// 
+			this->clientPhoto->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->clientPhoto->Location = System::Drawing::Point(7, 20);
+			this->clientPhoto->Name = L"clientPhoto";
+			this->clientPhoto->Size = System::Drawing::Size(130, 138);
+			this->clientPhoto->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+			this->clientPhoto->TabIndex = 0;
+			this->clientPhoto->TabStop = false;
+			this->clientPhoto->Click += gcnew System::EventHandler(this, &CBVTClient::pictureBox1_Click);
 			// 
 			// groupBox2
 			// 
-			this->groupBox2->Controls->Add(this->textBox8);
+			this->groupBox2->Controls->Add(this->travelEnd);
+			this->groupBox2->Controls->Add(this->travelStart);
 			this->groupBox2->Controls->Add(this->label7);
 			this->groupBox2->Controls->Add(this->label6);
-			this->groupBox2->Controls->Add(this->textBox6);
 			this->groupBox2->Location = System::Drawing::Point(13, 200);
 			this->groupBox2->Name = L"groupBox2";
 			this->groupBox2->Size = System::Drawing::Size(450, 100);
 			this->groupBox2->TabIndex = 1;
 			this->groupBox2->TabStop = false;
 			this->groupBox2->Text = L"Dates of Travel";
+			// 
+			// travelEnd
+			// 
+			this->travelEnd->Location = System::Drawing::Point(78, 49);
+			this->travelEnd->Name = L"travelEnd";
+			this->travelEnd->Size = System::Drawing::Size(200, 20);
+			this->travelEnd->TabIndex = 17;
+			// 
+			// travelStart
+			// 
+			this->travelStart->Location = System::Drawing::Point(78, 22);
+			this->travelStart->Name = L"travelStart";
+			this->travelStart->Size = System::Drawing::Size(200, 20);
+			this->travelStart->TabIndex = 16;
+			// 
+			// label7
+			// 
+			this->label7->AutoSize = true;
+			this->label7->Location = System::Drawing::Point(17, 55);
+			this->label7->Name = L"label7";
+			this->label7->Size = System::Drawing::Size(52, 13);
+			this->label7->TabIndex = 14;
+			this->label7->Text = L"End Date";
 			// 
 			// label6
 			// 
@@ -292,43 +416,20 @@ namespace CBVTClientNS {
 			this->label6->TabIndex = 12;
 			this->label6->Text = L"Start Date";
 			// 
-			// textBox6
-			// 
-			this->textBox6->Location = System::Drawing::Point(94, 25);
-			this->textBox6->Name = L"textBox6";
-			this->textBox6->Size = System::Drawing::Size(93, 20);
-			this->textBox6->TabIndex = 11;
-			// 
-			// label7
-			// 
-			this->label7->AutoSize = true;
-			this->label7->Location = System::Drawing::Point(238, 28);
-			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(52, 13);
-			this->label7->TabIndex = 14;
-			this->label7->Text = L"End Date";
-			// 
-			// textBox8
-			// 
-			this->textBox8->Location = System::Drawing::Point(320, 25);
-			this->textBox8->Name = L"textBox8";
-			this->textBox8->Size = System::Drawing::Size(93, 20);
-			this->textBox8->TabIndex = 15;
-			// 
 			// groupBox3
 			// 
-			this->groupBox3->Controls->Add(this->textBox13);
-			this->groupBox3->Controls->Add(this->label13);
-			this->groupBox3->Controls->Add(this->textBox12);
-			this->groupBox3->Controls->Add(this->label12);
-			this->groupBox3->Controls->Add(this->textBox11);
-			this->groupBox3->Controls->Add(this->label11);
-			this->groupBox3->Controls->Add(this->textBox10);
-			this->groupBox3->Controls->Add(this->label8);
-			this->groupBox3->Controls->Add(this->label10);
-			this->groupBox3->Controls->Add(this->textBox7);
-			this->groupBox3->Controls->Add(this->textBox9);
-			this->groupBox3->Controls->Add(this->label9);
+			this->groupBox3->Controls->Add(this->carYear);
+			this->groupBox3->Controls->Add(this->carModel);
+			this->groupBox3->Controls->Add(this->carModelLbl);
+			this->groupBox3->Controls->Add(this->carMake);
+			this->groupBox3->Controls->Add(this->carMakeLbl);
+			this->groupBox3->Controls->Add(this->carColor);
+			this->groupBox3->Controls->Add(this->carColorLbl);
+			this->groupBox3->Controls->Add(this->registrationNrLbl);
+			this->groupBox3->Controls->Add(this->carYearLbl);
+			this->groupBox3->Controls->Add(this->registrationNr);
+			this->groupBox3->Controls->Add(this->vinNr);
+			this->groupBox3->Controls->Add(this->vinNrLbl);
 			this->groupBox3->Location = System::Drawing::Point(469, 200);
 			this->groupBox3->Name = L"groupBox3";
 			this->groupBox3->Size = System::Drawing::Size(928, 100);
@@ -336,108 +437,110 @@ namespace CBVTClientNS {
 			this->groupBox3->TabStop = false;
 			this->groupBox3->Text = L"Vehicle Information";
 			// 
-			// label8
+			// carYear
 			// 
-			this->label8->AutoSize = true;
-			this->label8->Location = System::Drawing::Point(6, 26);
-			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(141, 13);
-			this->label8->TabIndex = 14;
-			this->label8->Text = L"Vehicle Registration Number";
+			this->carYear->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->carYear->FormattingEnabled = true;
+			this->carYear->Location = System::Drawing::Point(531, 55);
+			this->carYear->Name = L"carYear";
+			this->carYear->Size = System::Drawing::Size(121, 21);
+			this->carYear->TabIndex = 24;
 			// 
-			// textBox7
+			// carModel
 			// 
-			this->textBox7->Location = System::Drawing::Point(153, 23);
-			this->textBox7->Name = L"textBox7";
-			this->textBox7->Size = System::Drawing::Size(194, 20);
-			this->textBox7->TabIndex = 13;
+			this->carModel->Location = System::Drawing::Point(328, 59);
+			this->carModel->Name = L"carModel";
+			this->carModel->Size = System::Drawing::Size(126, 20);
+			this->carModel->TabIndex = 22;
 			// 
-			// label9
+			// carModelLbl
 			// 
-			this->label9->AutoSize = true;
-			this->label9->Location = System::Drawing::Point(447, 25);
-			this->label9->Name = L"label9";
-			this->label9->Size = System::Drawing::Size(65, 13);
-			this->label9->TabIndex = 12;
-			this->label9->Text = L"VIN Number";
+			this->carModelLbl->AutoSize = true;
+			this->carModelLbl->Location = System::Drawing::Point(244, 62);
+			this->carModelLbl->Name = L"carModelLbl";
+			this->carModelLbl->Size = System::Drawing::Size(36, 13);
+			this->carModelLbl->TabIndex = 23;
+			this->carModelLbl->Text = L"Model";
 			// 
-			// textBox9
+			// carMake
 			// 
-			this->textBox9->Location = System::Drawing::Point(531, 22);
-			this->textBox9->Name = L"textBox9";
-			this->textBox9->Size = System::Drawing::Size(199, 20);
-			this->textBox9->TabIndex = 11;
+			this->carMake->Location = System::Drawing::Point(90, 59);
+			this->carMake->Name = L"carMake";
+			this->carMake->Size = System::Drawing::Size(126, 20);
+			this->carMake->TabIndex = 20;
 			// 
-			// textBox10
+			// carMakeLbl
 			// 
-			this->textBox10->Location = System::Drawing::Point(543, 59);
-			this->textBox10->Name = L"textBox10";
-			this->textBox10->Size = System::Drawing::Size(93, 20);
-			this->textBox10->TabIndex = 17;
+			this->carMakeLbl->AutoSize = true;
+			this->carMakeLbl->Location = System::Drawing::Point(6, 62);
+			this->carMakeLbl->Name = L"carMakeLbl";
+			this->carMakeLbl->Size = System::Drawing::Size(34, 13);
+			this->carMakeLbl->TabIndex = 21;
+			this->carMakeLbl->Text = L"Make";
 			// 
-			// label10
+			// carColor
 			// 
-			this->label10->AutoSize = true;
-			this->label10->Location = System::Drawing::Point(485, 62);
-			this->label10->Name = L"label10";
-			this->label10->Size = System::Drawing::Size(29, 13);
-			this->label10->TabIndex = 16;
-			this->label10->Text = L"Year";
+			this->carColor->Location = System::Drawing::Point(743, 59);
+			this->carColor->Name = L"carColor";
+			this->carColor->Size = System::Drawing::Size(93, 20);
+			this->carColor->TabIndex = 19;
 			// 
-			// textBox11
+			// carColorLbl
 			// 
-			this->textBox11->Location = System::Drawing::Point(743, 59);
-			this->textBox11->Name = L"textBox11";
-			this->textBox11->Size = System::Drawing::Size(93, 20);
-			this->textBox11->TabIndex = 19;
+			this->carColorLbl->AutoSize = true;
+			this->carColorLbl->Location = System::Drawing::Point(691, 62);
+			this->carColorLbl->Name = L"carColorLbl";
+			this->carColorLbl->Size = System::Drawing::Size(31, 13);
+			this->carColorLbl->TabIndex = 18;
+			this->carColorLbl->Text = L"Color";
 			// 
-			// label11
+			// registrationNrLbl
 			// 
-			this->label11->AutoSize = true;
-			this->label11->Location = System::Drawing::Point(691, 62);
-			this->label11->Name = L"label11";
-			this->label11->Size = System::Drawing::Size(31, 13);
-			this->label11->TabIndex = 18;
-			this->label11->Text = L"Color";
+			this->registrationNrLbl->AutoSize = true;
+			this->registrationNrLbl->Location = System::Drawing::Point(6, 26);
+			this->registrationNrLbl->Name = L"registrationNrLbl";
+			this->registrationNrLbl->Size = System::Drawing::Size(141, 13);
+			this->registrationNrLbl->TabIndex = 14;
+			this->registrationNrLbl->Text = L"Vehicle Registration Number";
 			// 
-			// textBox12
+			// carYearLbl
 			// 
-			this->textBox12->Location = System::Drawing::Point(90, 59);
-			this->textBox12->Name = L"textBox12";
-			this->textBox12->Size = System::Drawing::Size(126, 20);
-			this->textBox12->TabIndex = 20;
+			this->carYearLbl->AutoSize = true;
+			this->carYearLbl->Location = System::Drawing::Point(485, 62);
+			this->carYearLbl->Name = L"carYearLbl";
+			this->carYearLbl->Size = System::Drawing::Size(29, 13);
+			this->carYearLbl->TabIndex = 16;
+			this->carYearLbl->Text = L"Year";
 			// 
-			// label12
+			// registrationNr
 			// 
-			this->label12->AutoSize = true;
-			this->label12->Location = System::Drawing::Point(6, 62);
-			this->label12->Name = L"label12";
-			this->label12->Size = System::Drawing::Size(34, 13);
-			this->label12->TabIndex = 21;
-			this->label12->Text = L"Make";
+			this->registrationNr->Location = System::Drawing::Point(153, 23);
+			this->registrationNr->Name = L"registrationNr";
+			this->registrationNr->Size = System::Drawing::Size(194, 20);
+			this->registrationNr->TabIndex = 13;
 			// 
-			// textBox13
+			// vinNr
 			// 
-			this->textBox13->Location = System::Drawing::Point(328, 59);
-			this->textBox13->Name = L"textBox13";
-			this->textBox13->Size = System::Drawing::Size(126, 20);
-			this->textBox13->TabIndex = 22;
+			this->vinNr->Location = System::Drawing::Point(531, 22);
+			this->vinNr->Name = L"vinNr";
+			this->vinNr->Size = System::Drawing::Size(199, 20);
+			this->vinNr->TabIndex = 11;
 			// 
-			// label13
+			// vinNrLbl
 			// 
-			this->label13->AutoSize = true;
-			this->label13->Location = System::Drawing::Point(244, 62);
-			this->label13->Name = L"label13";
-			this->label13->Size = System::Drawing::Size(36, 13);
-			this->label13->TabIndex = 23;
-			this->label13->Text = L"Model";
+			this->vinNrLbl->AutoSize = true;
+			this->vinNrLbl->Location = System::Drawing::Point(447, 25);
+			this->vinNrLbl->Name = L"vinNrLbl";
+			this->vinNrLbl->Size = System::Drawing::Size(65, 13);
+			this->vinNrLbl->TabIndex = 12;
+			this->vinNrLbl->Text = L"VIN Number";
 			// 
 			// groupBox4
 			// 
-			this->groupBox4->Controls->Add(this->label15);
-			this->groupBox4->Controls->Add(this->textBox15);
-			this->groupBox4->Controls->Add(this->label14);
-			this->groupBox4->Controls->Add(this->textBox14);
+			this->groupBox4->Controls->Add(this->loanNrLbl);
+			this->groupBox4->Controls->Add(this->loanNr);
+			this->groupBox4->Controls->Add(this->bankNameLbl);
+			this->groupBox4->Controls->Add(this->bankName);
 			this->groupBox4->Location = System::Drawing::Point(13, 306);
 			this->groupBox4->Name = L"groupBox4";
 			this->groupBox4->Size = System::Drawing::Size(614, 70);
@@ -445,44 +548,44 @@ namespace CBVTClientNS {
 			this->groupBox4->TabStop = false;
 			this->groupBox4->Text = L"Bank Information";
 			// 
-			// label14
+			// loanNrLbl
 			// 
-			this->label14->AutoSize = true;
-			this->label14->Location = System::Drawing::Point(17, 27);
-			this->label14->Name = L"label14";
-			this->label14->Size = System::Drawing::Size(63, 13);
-			this->label14->TabIndex = 12;
-			this->label14->Text = L"Bank Name";
+			this->loanNrLbl->AutoSize = true;
+			this->loanNrLbl->Location = System::Drawing::Point(312, 27);
+			this->loanNrLbl->Name = L"loanNrLbl";
+			this->loanNrLbl->Size = System::Drawing::Size(71, 13);
+			this->loanNrLbl->TabIndex = 14;
+			this->loanNrLbl->Text = L"Loan Number";
 			// 
-			// textBox14
+			// loanNr
 			// 
-			this->textBox14->Location = System::Drawing::Point(94, 27);
-			this->textBox14->Name = L"textBox14";
-			this->textBox14->Size = System::Drawing::Size(170, 20);
-			this->textBox14->TabIndex = 11;
+			this->loanNr->Location = System::Drawing::Point(389, 27);
+			this->loanNr->Name = L"loanNr";
+			this->loanNr->Size = System::Drawing::Size(170, 20);
+			this->loanNr->TabIndex = 13;
 			// 
-			// label15
+			// bankNameLbl
 			// 
-			this->label15->AutoSize = true;
-			this->label15->Location = System::Drawing::Point(312, 27);
-			this->label15->Name = L"label15";
-			this->label15->Size = System::Drawing::Size(71, 13);
-			this->label15->TabIndex = 14;
-			this->label15->Text = L"Loan Number";
+			this->bankNameLbl->AutoSize = true;
+			this->bankNameLbl->Location = System::Drawing::Point(17, 27);
+			this->bankNameLbl->Name = L"bankNameLbl";
+			this->bankNameLbl->Size = System::Drawing::Size(63, 13);
+			this->bankNameLbl->TabIndex = 12;
+			this->bankNameLbl->Text = L"Bank Name";
 			// 
-			// textBox15
+			// bankName
 			// 
-			this->textBox15->Location = System::Drawing::Point(389, 27);
-			this->textBox15->Name = L"textBox15";
-			this->textBox15->Size = System::Drawing::Size(170, 20);
-			this->textBox15->TabIndex = 13;
+			this->bankName->Location = System::Drawing::Point(94, 27);
+			this->bankName->Name = L"bankName";
+			this->bankName->Size = System::Drawing::Size(170, 20);
+			this->bankName->TabIndex = 11;
 			// 
 			// groupBox5
 			// 
-			this->groupBox5->Controls->Add(this->label16);
-			this->groupBox5->Controls->Add(this->textBox16);
-			this->groupBox5->Controls->Add(this->label17);
-			this->groupBox5->Controls->Add(this->textBox17);
+			this->groupBox5->Controls->Add(this->policyNrLbl);
+			this->groupBox5->Controls->Add(this->policyNr);
+			this->groupBox5->Controls->Add(this->insurNameLbl);
+			this->groupBox5->Controls->Add(this->insurName);
 			this->groupBox5->Location = System::Drawing::Point(633, 306);
 			this->groupBox5->Name = L"groupBox5";
 			this->groupBox5->Size = System::Drawing::Size(764, 70);
@@ -490,101 +593,71 @@ namespace CBVTClientNS {
 			this->groupBox5->TabStop = false;
 			this->groupBox5->Text = L"Insurance Information";
 			// 
-			// label16
+			// policyNrLbl
 			// 
-			this->label16->AutoSize = true;
-			this->label16->Location = System::Drawing::Point(321, 27);
-			this->label16->Name = L"label16";
-			this->label16->Size = System::Drawing::Size(75, 13);
-			this->label16->TabIndex = 14;
-			this->label16->Text = L"Policy Number";
+			this->policyNrLbl->AutoSize = true;
+			this->policyNrLbl->Location = System::Drawing::Point(321, 27);
+			this->policyNrLbl->Name = L"policyNrLbl";
+			this->policyNrLbl->Size = System::Drawing::Size(75, 13);
+			this->policyNrLbl->TabIndex = 14;
+			this->policyNrLbl->Text = L"Policy Number";
 			// 
-			// textBox16
+			// policyNr
 			// 
-			this->textBox16->Location = System::Drawing::Point(415, 27);
-			this->textBox16->Name = L"textBox16";
-			this->textBox16->Size = System::Drawing::Size(170, 20);
-			this->textBox16->TabIndex = 13;
+			this->policyNr->Location = System::Drawing::Point(415, 27);
+			this->policyNr->Name = L"policyNr";
+			this->policyNr->Size = System::Drawing::Size(170, 20);
+			this->policyNr->TabIndex = 13;
 			// 
-			// label17
+			// insurNameLbl
 			// 
-			this->label17->AutoSize = true;
-			this->label17->Location = System::Drawing::Point(17, 27);
-			this->label17->Name = L"label17";
-			this->label17->Size = System::Drawing::Size(82, 13);
-			this->label17->TabIndex = 12;
-			this->label17->Text = L"Company Name";
+			this->insurNameLbl->AutoSize = true;
+			this->insurNameLbl->Location = System::Drawing::Point(17, 27);
+			this->insurNameLbl->Name = L"insurNameLbl";
+			this->insurNameLbl->Size = System::Drawing::Size(82, 13);
+			this->insurNameLbl->TabIndex = 12;
+			this->insurNameLbl->Text = L"Company Name";
 			// 
-			// textBox17
+			// insurName
 			// 
-			this->textBox17->Location = System::Drawing::Point(120, 27);
-			this->textBox17->Name = L"textBox17";
-			this->textBox17->Size = System::Drawing::Size(170, 20);
-			this->textBox17->TabIndex = 11;
+			this->insurName->Location = System::Drawing::Point(120, 27);
+			this->insurName->Name = L"insurName";
+			this->insurName->Size = System::Drawing::Size(170, 20);
+			this->insurName->TabIndex = 11;
 			// 
-			// button1
+			// submitInfoButton
 			// 
-			this->button1->Location = System::Drawing::Point(1273, 403);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(124, 23);
-			this->button1->TabIndex = 16;
-			this->button1->Text = L"Submit Information";
-			this->button1->UseVisualStyleBackColor = true;
+			this->submitInfoButton->Location = System::Drawing::Point(1273, 403);
+			this->submitInfoButton->Name = L"submitInfoButton";
+			this->submitInfoButton->Size = System::Drawing::Size(124, 23);
+			this->submitInfoButton->TabIndex = 16;
+			this->submitInfoButton->Text = L"Submit Information";
+			this->submitInfoButton->UseVisualStyleBackColor = true;
+			this->submitInfoButton->Click += gcnew System::EventHandler(this, &CBVTClient::button1_Click);
 			// 
-			// label18
+			// statusStrip1
 			// 
-			this->label18->AutoSize = true;
-			this->label18->Location = System::Drawing::Point(564, 125);
-			this->label18->Name = L"label18";
-			this->label18->Size = System::Drawing::Size(24, 13);
-			this->label18->TabIndex = 12;
-			this->label18->Text = L"City";
+			this->statusStrip1->Location = System::Drawing::Point(0, 428);
+			this->statusStrip1->Name = L"statusStrip1";
+			this->statusStrip1->Size = System::Drawing::Size(1409, 22);
+			this->statusStrip1->TabIndex = 82;
+			this->statusStrip1->Text = L"statusStrip1";
 			// 
-			// textBox18
+			// zip
 			// 
-			this->textBox18->Location = System::Drawing::Point(609, 122);
-			this->textBox18->Name = L"textBox18";
-			this->textBox18->Size = System::Drawing::Size(192, 20);
-			this->textBox18->TabIndex = 11;
-			// 
-			// label19
-			// 
-			this->label19->AutoSize = true;
-			this->label19->Location = System::Drawing::Point(1181, 125);
-			this->label19->Name = L"label19";
-			this->label19->Size = System::Drawing::Size(22, 13);
-			this->label19->TabIndex = 16;
-			this->label19->Text = L"Zip";
-			// 
-			// textBox19
-			// 
-			this->textBox19->Location = System::Drawing::Point(1227, 122);
-			this->textBox19->Name = L"textBox19";
-			this->textBox19->Size = System::Drawing::Size(133, 20);
-			this->textBox19->TabIndex = 15;
-			// 
-			// label20
-			// 
-			this->label20->AutoSize = true;
-			this->label20->Location = System::Drawing::Point(856, 125);
-			this->label20->Name = L"label20";
-			this->label20->Size = System::Drawing::Size(85, 13);
-			this->label20->TabIndex = 14;
-			this->label20->Text = L"State / Province";
-			// 
-			// textBox20
-			// 
-			this->textBox20->Location = System::Drawing::Point(963, 122);
-			this->textBox20->Name = L"textBox20";
-			this->textBox20->Size = System::Drawing::Size(192, 20);
-			this->textBox20->TabIndex = 13;
+			this->zip->Location = System::Drawing::Point(1219, 122);
+			this->zip->Mask = L"00000-9999";
+			this->zip->Name = L"zip";
+			this->zip->Size = System::Drawing::Size(100, 20);
+			this->zip->TabIndex = 87;
 			// 
 			// CBVTClient
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1409, 450);
-			this->Controls->Add(this->button1);
+			this->Controls->Add(this->statusStrip1);
+			this->Controls->Add(this->submitInfoButton);
 			this->Controls->Add(this->groupBox5);
 			this->Controls->Add(this->groupBox4);
 			this->Controls->Add(this->groupBox3);
@@ -594,7 +667,7 @@ namespace CBVTClientNS {
 			this->Text = L"CBVT Client System";
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->clientPhoto))->EndInit();
 			this->groupBox2->ResumeLayout(false);
 			this->groupBox2->PerformLayout();
 			this->groupBox3->ResumeLayout(false);
@@ -604,10 +677,95 @@ namespace CBVTClientNS {
 			this->groupBox5->ResumeLayout(false);
 			this->groupBox5->PerformLayout();
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 	private: System::Void label1_Click(System::Object^  sender, System::EventArgs^  e) {
 	}
-	};
+	private: System::Void pictureBox1_Click(System::Object^  sender, System::EventArgs^  e) {
+				 OpenFileDialog^ loadImage = gcnew OpenFileDialog();
+				 if (loadImage->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+					 clientPhoto->Image = Image::FromFile(loadImage->FileName);
+				 }
+	}
+	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+				 String^ missingInfo = "Please fill the following fields:";
+
+				 //Check if fields are filled with information
+				 if (!clientPhoto->Image)
+					 missingInfo = missingInfo + " Photograph,";
+
+				 if (firstName->Text->Length == 0)
+					 missingInfo = missingInfo + " " + firstNameLbl->Text + ",";
+
+				 if (lastName->Text->Length == 0)
+					 missingInfo = missingInfo +" " + lastNameLbl->Text + ",";
+
+				 if (licenseNr->Text->Length == 0)
+					 missingInfo = missingInfo +" " + licenseNrLbl->Text + ",";
+
+				 if (passportNr->Text->Length == 0)
+					 missingInfo = missingInfo + " " + passportNrLbl->Text + ",";
+
+				 if (address->Text->Length == 0)
+					 missingInfo = missingInfo + " " + addressLbl->Text + ",";
+
+				 if (city->Text->Length == 0)
+					 missingInfo = missingInfo + " " + cityLbl->Text + ",";
+
+				 if (stateProvince->Text->Length == 0)
+					 missingInfo = missingInfo + " " + stateProvinceLbl->Text + ",";
+
+				 if (zip->Text->Contains(" "))
+					 missingInfo = missingInfo + " " + zipLbl->Text + ",";
+
+				 if (registrationNr->Text->Length == 0)
+					 missingInfo = missingInfo + " " + registrationNrLbl->Text + ",";
+
+				 if (vinNr->Text->Length == 0)
+					 missingInfo = missingInfo + " " + vinNrLbl->Text + ",";
+
+				 if (carMake->Text->Length == 0)
+					 missingInfo = missingInfo + " " + carMakeLbl->Text + ",";
+
+				 if (carModel->Text->Length == 0)
+					 missingInfo = missingInfo + " " + carModelLbl->Text + ",";
+
+				 if (carColor->Text->Length == 0)
+					 missingInfo = missingInfo + " " + carColorLbl->Text + ",";
+
+				 if (bankName->Text->Length == 0)
+					 missingInfo = missingInfo + " " + bankNameLbl->Text + ",";
+
+				 if (loanNr->Text->Length == 0)
+					 missingInfo = missingInfo + " " + loanNrLbl->Text + ",";
+
+				 if (insurName->Text->Length == 0)
+					 missingInfo = missingInfo + " " + insurNameLbl->Text + ",";
+
+				 if (policyNr->Text->Length == 0)
+					 missingInfo = missingInfo + " " + policyNrLbl->Text + ",";
+
+				 if (missingInfo->Length > 33)
+				 {
+					 MessageBox::Show(missingInfo);
+					 return;
+				 }
+
+			//Check if certain fields are valid according to constraints
+				 if (travelEnd->Value < travelStart->Value)
+				 {
+					 MessageBox::Show("Please ensure the end date of travel is on or after the start date of travel!");
+					 return;
+				 }
+
+
+
+			 Client aClient;
+			 MessageBox::Show("Request submitted");
+			 aClient.Stop();
+			 this->Close();
+}
+};
 }
 #pragma endregion
