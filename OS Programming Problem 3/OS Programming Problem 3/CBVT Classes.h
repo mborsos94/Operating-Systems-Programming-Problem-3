@@ -38,9 +38,9 @@ public:
 	~Client();
 	DWORD run();
 	auto_ptr<Client> client_ptr;
-	Document clientDoc;
-	string fName;
-	string lName;
+	//Document clientDoc;
+	//string fName;
+	//string lName;
 };
 
 public class BankInsur : public Thread
