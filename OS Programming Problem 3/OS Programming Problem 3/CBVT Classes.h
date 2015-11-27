@@ -1,8 +1,12 @@
 #include  <Windows.h>
 #include <iostream>
 #include <time.h>
+#include "rapidjson/document.h"
+#include <vector>
 
 using namespace std;
+using namespace rapidjson;
+
 #ifndef _CBVT_CLASSES_H
 #define _CBVT_CLASSES_H
 
@@ -34,6 +38,9 @@ public:
 	~Client();
 	DWORD run();
 	auto_ptr<Client> client_ptr;
+	Document clientDoc;
+	string fName;
+	string lName;
 };
 
 public class BankInsur : public Thread

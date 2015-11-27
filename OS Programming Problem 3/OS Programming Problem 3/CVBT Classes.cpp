@@ -45,8 +45,9 @@ Client::~Client()
 
 DWORD Client::run()
 {
-	while (true)
+	clientDoc.SetObject();
 	{
+		Value clients(kArrayType);
 	}
 }
 
