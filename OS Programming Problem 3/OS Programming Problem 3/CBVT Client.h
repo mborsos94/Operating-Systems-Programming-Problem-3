@@ -1,5 +1,15 @@
 #pragma once
+#include <msclr\marshal_cppstd.h>
+#include <fstream>
+#include <cstdio>
+
+#include "stdafx.h"
 #include "CBVT Classes.h"
+#include "rapidjson/document.h"
+#include "rapidjson/writer.h"
+#include "rapidjson/stringbuffer.h"
+#include "rapidjson/filewritestream.h"
+
 
 namespace CBVTClientNS {
 
@@ -9,6 +19,7 @@ namespace CBVTClientNS {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Runtime::InteropServices;
 
 	/// <summary>
 	/// Summary for CBVTClient
@@ -690,61 +701,170 @@ private: System::Windows::Forms::MaskedTextBox^  zip;
 	}
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 				 String^ missingInfo = "Please fill the following fields:";
-
 				 //Check if fields are filled with information
+
+				 rapidjson::Document *newDoc = new rapidjson::Document;
+				 
+				 // Parse an empty JSON objext to initialize the document.
+				 const char* json = "{   }";
+				 bool fileAlreadyPopulated = false;
+				 newDoc->Parse(json);
+				 newDoc->SetObject();
 				 if (!clientPhoto->Image)
 					 missingInfo = missingInfo + " Photograph,";
 
 				 if (firstName->Text->Length == 0)
 					 missingInfo = missingInfo + " " + firstNameLbl->Text + ",";
+				 else {
+					 rapidjson::Value newValue;
+					 std::string unmanaged = msclr::interop::marshal_as<std::string>(firstName->Text);
+					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
+					 newDoc->AddMember("first_name", newValue, newDoc->GetAllocator());
+				 }
 
 				 if (lastName->Text->Length == 0)
 					 missingInfo = missingInfo +" " + lastNameLbl->Text + ",";
+				 else {
+					 rapidjson::Value newValue;
+					 std::string unmanaged = msclr::interop::marshal_as<std::string>(lastName->Text);
+					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
+					 newDoc->AddMember("last_name", newValue, newDoc->GetAllocator());
+				 }
 
 				 if (licenseNr->Text->Length == 0)
 					 missingInfo = missingInfo +" " + licenseNrLbl->Text + ",";
+				 else {
+					 rapidjson::Value newValue;
+					 std::string unmanaged = msclr::interop::marshal_as<std::string>(licenseNr->Text);
+					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
+					 newDoc->AddMember("license_number", newValue, newDoc->GetAllocator());
+				 }
 
 				 if (passportNr->Text->Length == 0)
 					 missingInfo = missingInfo + " " + passportNrLbl->Text + ",";
+				 else {
+					 rapidjson::Value newValue;
+					 std::string unmanaged = msclr::interop::marshal_as<std::string>(passportNr->Text);
+					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
+					 newDoc->AddMember("passport_number", newValue, newDoc->GetAllocator());
+				 }
 
 				 if (address->Text->Length == 0)
 					 missingInfo = missingInfo + " " + addressLbl->Text + ",";
+				 else {
+					 rapidjson::Value newValue;
+					 std::string unmanaged = msclr::interop::marshal_as<std::string>(address->Text);
+					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
+					 newDoc->AddMember("address", newValue, newDoc->GetAllocator());
+				 }
 
 				 if (city->Text->Length == 0)
 					 missingInfo = missingInfo + " " + cityLbl->Text + ",";
+				 else {
+					 rapidjson::Value newValue;
+					 std::string unmanaged = msclr::interop::marshal_as<std::string>(city->Text);
+					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
+					 newDoc->AddMember("city", newValue, newDoc->GetAllocator());
+				 }
 
 				 if (stateProvince->Text->Length == 0)
 					 missingInfo = missingInfo + " " + stateProvinceLbl->Text + ",";
+				 else {
+					 rapidjson::Value newValue;
+					 std::string unmanaged = msclr::interop::marshal_as<std::string>(stateProvince->Text);
+					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
+					 newDoc->AddMember("state_province", newValue, newDoc->GetAllocator());
+				 }
 
 				 if (zip->Text->Contains(" "))
 					 missingInfo = missingInfo + " " + zipLbl->Text + ",";
+				 else {
+					 rapidjson::Value newValue;
+					 std::string unmanaged = msclr::interop::marshal_as<std::string>(zip->Text);
+					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
+					 newDoc->AddMember("zip", newValue, newDoc->GetAllocator());
+				 }
 
 				 if (registrationNr->Text->Length == 0)
 					 missingInfo = missingInfo + " " + registrationNrLbl->Text + ",";
+				 else {
+					 rapidjson::Value newValue;
+					 std::string unmanaged = msclr::interop::marshal_as<std::string>(registrationNr->Text);
+					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
+					 newDoc->AddMember("registration_number", newValue, newDoc->GetAllocator());
+				 }
 
 				 if (vinNr->Text->Length == 0)
 					 missingInfo = missingInfo + " " + vinNrLbl->Text + ",";
+				 else {
+					 rapidjson::Value newValue;
+					 std::string unmanaged = msclr::interop::marshal_as<std::string>(vinNr->Text);
+					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
+					 newDoc->AddMember("vin_number", newValue, newDoc->GetAllocator());
+				 }
 
 				 if (carMake->Text->Length == 0)
 					 missingInfo = missingInfo + " " + carMakeLbl->Text + ",";
+				 else {
+					 rapidjson::Value newValue;
+					 std::string unmanaged = msclr::interop::marshal_as<std::string>(carMake->Text);
+					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
+					 newDoc->AddMember("car_make", newValue, newDoc->GetAllocator());
+				 }
 
 				 if (carModel->Text->Length == 0)
 					 missingInfo = missingInfo + " " + carModelLbl->Text + ",";
+				 else {
+					 rapidjson::Value newValue;
+					 std::string unmanaged = msclr::interop::marshal_as<std::string>(carModel->Text);
+					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
+					 newDoc->AddMember("car_model", newValue, newDoc->GetAllocator());
+				 }
 
 				 if (carColor->Text->Length == 0)
 					 missingInfo = missingInfo + " " + carColorLbl->Text + ",";
+				 else {
+					 rapidjson::Value newValue;
+					 std::string unmanaged = msclr::interop::marshal_as<std::string>(carColor->Text);
+					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
+					 newDoc->AddMember("car_color", newValue, newDoc->GetAllocator());
+				 }
 
 				 if (bankName->Text->Length == 0)
 					 missingInfo = missingInfo + " " + bankNameLbl->Text + ",";
+				 else {
+					 rapidjson::Value newValue;
+					 std::string unmanaged = msclr::interop::marshal_as<std::string>(bankName->Text);
+					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
+					 newDoc->AddMember("bank_name", newValue, newDoc->GetAllocator());
+				 }
 
 				 if (loanNr->Text->Length == 0)
 					 missingInfo = missingInfo + " " + loanNrLbl->Text + ",";
+				 else {
+					 rapidjson::Value newValue;
+					 std::string unmanaged = msclr::interop::marshal_as<std::string>(loanNr->Text);
+					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
+					 newDoc->AddMember("loan_number", newValue, newDoc->GetAllocator());
+				 }
 
 				 if (insurName->Text->Length == 0)
 					 missingInfo = missingInfo + " " + insurNameLbl->Text + ",";
+				 else {
+					 rapidjson::Value newValue;
+					 std::string unmanaged = msclr::interop::marshal_as<std::string>(insurName->Text);
+					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
+					 newDoc->AddMember("insurance_name", newValue, newDoc->GetAllocator());
+				 }
 
 				 if (policyNr->Text->Length == 0)
 					 missingInfo = missingInfo + " " + policyNrLbl->Text + ",";
+				 else {
+					 rapidjson::Value newValue;
+					 std::string unmanaged = msclr::interop::marshal_as<std::string>(policyNr->Text);
+					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
+					 newDoc->AddMember("policy_number", newValue, newDoc->GetAllocator());
+				 }
 
 				 if (missingInfo->Length > 33)
 				 {
@@ -757,10 +877,29 @@ private: System::Windows::Forms::MaskedTextBox^  zip;
 				 {
 					 MessageBox::Show("Please ensure the end date of travel is on or after the start date of travel!");
 					 return;
+				 } 
+				 else {
+					 rapidjson::Value newValue, newValue2;
+					 std::string unmanaged = msclr::interop::marshal_as<std::string>(travelEnd->Value.ToLongDateString());
+					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
+					 newDoc->AddMember("travel_end", newValue, newDoc->GetAllocator());
+					 std::string travel_start = msclr::interop::marshal_as<std::string>(travelStart->Value.ToLongDateString());
+					 newValue2.SetString(travel_start.c_str(), travel_start.length());
+					 newDoc->AddMember("travel_start", newValue2, newDoc->GetAllocator());
 				 }
-
-
-
+				 rapidjson::Value verified, verified2;
+				 verified.SetBool(false);
+				 verified2.SetBool(false);
+				 newDoc->AddMember("dmv_verified", verified, newDoc->GetAllocator());
+				 newDoc->AddMember("bank_verified", verified2, newDoc->GetAllocator());
+				 FILE* fp = fopen(CLIENT_INPUT_FILE, "wb");
+				 char writeBuffer[65536];
+				 rapidjson::FileWriteStream os(fp, writeBuffer, sizeof(writeBuffer));
+				 rapidjson::Writer<rapidjson::FileWriteStream> writer(os);
+				 newDoc->Accept(writer);
+				 fclose(fp);
+					 
+			 
 			 Client aClient;
 			 MessageBox::Show("Request submitted");
 			 aClient.Stop();

@@ -1,5 +1,14 @@
 #pragma once
+#include <cstdio>
+#include <fstream>
+#include <msclr\marshal_cppstd.h>
+
 #include "CBVT Classes.h"
+#include "rapidjson/document.h"
+#include "rapidjson/writer.h"
+#include "rapidjson/stringbuffer.h"
+#include "rapidjson/filereadstream.h"
+#include "rapidjson/filewritestream.h"
 
 namespace CBVTBankInsurNS {
 
@@ -36,12 +45,14 @@ namespace CBVTBankInsurNS {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::RichTextBox^  richTextBox1;
+	private: System::Windows::Forms::RichTextBox^  authorizedAccounts;
+	protected:
+
 	protected:
 	private: System::Windows::Forms::Label^  label20;
 	private: System::Windows::Forms::StatusStrip^  statusStrip1;
 
-	private: System::Windows::Forms::Button^  button3;
+
 	private: System::Windows::Forms::TextBox^  carModel;
 
 	private: System::Windows::Forms::TextBox^  textBox14;
@@ -104,6 +115,7 @@ namespace CBVTBankInsurNS {
 	private: System::Windows::Forms::TextBox^  policyNr;
 	private: System::Windows::Forms::Label^  insurNameLbl;
 	private: System::Windows::Forms::TextBox^  insurName;
+	private: System::Windows::Forms::Button^  loadAuthorized;
 
 
 	protected:
@@ -167,10 +179,9 @@ namespace CBVTBankInsurNS {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
+			this->authorizedAccounts = (gcnew System::Windows::Forms::RichTextBox());
 			this->label20 = (gcnew System::Windows::Forms::Label());
 			this->statusStrip1 = (gcnew System::Windows::Forms::StatusStrip());
-			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->carModel = (gcnew System::Windows::Forms::TextBox());
 			this->textBox14 = (gcnew System::Windows::Forms::TextBox());
 			this->registrationNr = (gcnew System::Windows::Forms::TextBox());
@@ -217,15 +228,17 @@ namespace CBVTBankInsurNS {
 			this->policyNr = (gcnew System::Windows::Forms::TextBox());
 			this->insurNameLbl = (gcnew System::Windows::Forms::Label());
 			this->insurName = (gcnew System::Windows::Forms::TextBox());
+			this->loadAuthorized = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
-			// richTextBox1
+			// authorizedAccounts
 			// 
-			this->richTextBox1->Location = System::Drawing::Point(684, 45);
-			this->richTextBox1->Name = L"richTextBox1";
-			this->richTextBox1->Size = System::Drawing::Size(323, 392);
-			this->richTextBox1->TabIndex = 83;
-			this->richTextBox1->Text = L"This is a placeholder for potentially displaying the information found in the DB,"
+			this->authorizedAccounts->Location = System::Drawing::Point(684, 20);
+			this->authorizedAccounts->Name = L"authorizedAccounts";
+			this->authorizedAccounts->ReadOnly = true;
+			this->authorizedAccounts->Size = System::Drawing::Size(323, 417);
+			this->authorizedAccounts->TabIndex = 83;
+			this->authorizedAccounts->Text = L"This is a placeholder for potentially displaying the information found in the DB,"
 				L" there is probably a better way to do this but I am lazy";
 			// 
 			// label20
@@ -244,15 +257,6 @@ namespace CBVTBankInsurNS {
 			this->statusStrip1->Size = System::Drawing::Size(1048, 22);
 			this->statusStrip1->TabIndex = 81;
 			this->statusStrip1->Text = L"statusStrip1";
-			// 
-			// button3
-			// 
-			this->button3->Location = System::Drawing::Point(684, 16);
-			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(141, 23);
-			this->button3->TabIndex = 79;
-			this->button3->Text = L"Search for Matching VIN";
-			this->button3->UseVisualStyleBackColor = true;
 			// 
 			// carModel
 			// 
@@ -534,6 +538,7 @@ namespace CBVTBankInsurNS {
 			this->listBox1->Name = L"listBox1";
 			this->listBox1->Size = System::Drawing::Size(185, 446);
 			this->listBox1->TabIndex = 42;
+			this->listBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &CBVTBankInsurance::listBox1_SelectedIndexChanged);
 			// 
 			// travelStart
 			// 
@@ -629,11 +634,22 @@ namespace CBVTBankInsurNS {
 			this->insurName->Size = System::Drawing::Size(125, 20);
 			this->insurName->TabIndex = 97;
 			// 
+			// loadAuthorized
+			// 
+			this->loadAuthorized->Location = System::Drawing::Point(684, 443);
+			this->loadAuthorized->Name = L"loadAuthorized";
+			this->loadAuthorized->Size = System::Drawing::Size(141, 23);
+			this->loadAuthorized->TabIndex = 101;
+			this->loadAuthorized->Text = L"Load Authorized Accounts";
+			this->loadAuthorized->UseVisualStyleBackColor = true;
+			this->loadAuthorized->Click += gcnew System::EventHandler(this, &CBVTBankInsurance::loadAuthorized_Click);
+			// 
 			// CBVTBankInsurance
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1048, 503);
+			this->Controls->Add(this->loadAuthorized);
 			this->Controls->Add(this->policyNrLbl);
 			this->Controls->Add(this->policyNr);
 			this->Controls->Add(this->insurNameLbl);
@@ -646,10 +662,9 @@ namespace CBVTBankInsurNS {
 			this->Controls->Add(this->zip);
 			this->Controls->Add(this->travelEnd);
 			this->Controls->Add(this->travelStart);
-			this->Controls->Add(this->richTextBox1);
+			this->Controls->Add(this->authorizedAccounts);
 			this->Controls->Add(this->label20);
 			this->Controls->Add(this->statusStrip1);
-			this->Controls->Add(this->button3);
 			this->Controls->Add(this->carModel);
 			this->Controls->Add(this->textBox14);
 			this->Controls->Add(this->registrationNr);
@@ -691,5 +706,17 @@ namespace CBVTBankInsurNS {
 
 		}
 #pragma endregion
-	};
+	private: System::Void listBox1_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
+	}
+	private: System::Void loadAuthorized_Click(System::Object^  sender, System::EventArgs^  e) {
+		FILE* fp = fopen(AUTHORIZED_BANK, "rb");
+		rapidjson::Document *readDoc;
+		char readBuffer[65536];
+		rapidjson::FileReadStream instream(fp, readBuffer, sizeof(readBuffer));		
+		readDoc->ParseStream(instream);
+		fclose(fp);
+		String^ myStr = gcnew String(readDoc->GetString());
+		authorizedAccounts->Text = myStr;
+	}
+};
 }
