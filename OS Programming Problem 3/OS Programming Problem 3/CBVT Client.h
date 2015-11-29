@@ -899,7 +899,7 @@ private: System::Windows::Forms::MaskedTextBox^  zip;
 				 fclose(fp);
 			 
 			 Client aClient;
-			 MessageBox::Show("The request has successfully been submitted!");
+			 MessageBox::Show("Request submitted");
 			 aClient.Stop();
 			 this->Close();
 }
