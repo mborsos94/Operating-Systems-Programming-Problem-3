@@ -45,9 +45,11 @@ Client::~Client()
 
 DWORD Client::run()
 {
-	while (true)
+	/*clientDoc.SetObject();
 	{
-	}
+		Value clients(kArrayType);
+	}*/
+	return 0;
 }
 
 BankInsur::BankInsur()
@@ -64,9 +66,7 @@ BankInsur::~BankInsur()
 
 DWORD BankInsur::run()
 {
-	while (true)
-	{
-	}
+	return 0;
 }
 
 DMV::DMV()
@@ -83,7 +83,5 @@ DMV::~DMV()
 
 DWORD DMV::run()
 {
-	while (true)
-	{
-	}
+	return 0;
 }
