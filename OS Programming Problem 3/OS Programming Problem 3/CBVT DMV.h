@@ -1,5 +1,10 @@
 #pragma once
 #include "CBVT Classes.h"
+#include "rapidjson/document.h"
+#include "rapidjson/writer.h"
+#include "rapidjson/stringbuffer.h"
+#include "rapidjson/filereadstream.h"
+#include "rapidjson/filewritestream.h"
 
 namespace CBVTDMVNS {
 
@@ -36,11 +41,13 @@ namespace CBVTDMVNS {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::ListBox^  listBox1;
+
 	protected:
 	private: System::Windows::Forms::Label^  label1;
-	private: System::Windows::Forms::Button^  button1;
-	private: System::Windows::Forms::Button^  button2;
+	private: System::Windows::Forms::Button^  approve;
+	private: System::Windows::Forms::Button^  reject;
+
+
 	private: System::Windows::Forms::TextBox^  textBox1;
 	private: System::Windows::Forms::TextBox^  textBox2;
 	private: System::Windows::Forms::TextBox^  textBox3;
@@ -74,17 +81,24 @@ namespace CBVTDMVNS {
 
 	private: System::Windows::Forms::TextBox^  textBox14;
 	private: System::Windows::Forms::TextBox^  textBox15;
-	private: System::Windows::Forms::Button^  button3;
+
 
 	private: System::Windows::Forms::StatusStrip^  statusStrip1;
 	private: System::Windows::Forms::Label^  label20;
-	private: System::Windows::Forms::RichTextBox^  richTextBox1;
+	private: System::Windows::Forms::RichTextBox^  authorizedAccounts;
+
+
 	private: System::Windows::Forms::DateTimePicker^  dateTimePicker2;
 	private: System::Windows::Forms::DateTimePicker^  dateTimePicker1;
 	private: System::Windows::Forms::Label^  label11;
 	private: System::Windows::Forms::Label^  label10;
 	private: System::Windows::Forms::MaskedTextBox^  zip;
 	private: System::Windows::Forms::MaskedTextBox^  maskedTextBox1;
+	private: System::Windows::Forms::Button^  loadAuthroized;
+	private: System::Windows::Forms::RichTextBox^  clientInput;
+
+	private: System::Windows::Forms::Button^  loadRequests;
+
 
 	protected:
 
@@ -101,10 +115,9 @@ namespace CBVTDMVNS {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->listBox1 = (gcnew System::Windows::Forms::ListBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->approve = (gcnew System::Windows::Forms::Button());
+			this->reject = (gcnew System::Windows::Forms::Button());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
@@ -133,25 +146,19 @@ namespace CBVTDMVNS {
 			this->textBox10 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox14 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox15 = (gcnew System::Windows::Forms::TextBox());
-			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->statusStrip1 = (gcnew System::Windows::Forms::StatusStrip());
 			this->label20 = (gcnew System::Windows::Forms::Label());
-			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
+			this->authorizedAccounts = (gcnew System::Windows::Forms::RichTextBox());
 			this->dateTimePicker2 = (gcnew System::Windows::Forms::DateTimePicker());
 			this->dateTimePicker1 = (gcnew System::Windows::Forms::DateTimePicker());
 			this->label11 = (gcnew System::Windows::Forms::Label());
 			this->label10 = (gcnew System::Windows::Forms::Label());
 			this->zip = (gcnew System::Windows::Forms::MaskedTextBox());
 			this->maskedTextBox1 = (gcnew System::Windows::Forms::MaskedTextBox());
+			this->loadAuthroized = (gcnew System::Windows::Forms::Button());
+			this->clientInput = (gcnew System::Windows::Forms::RichTextBox());
+			this->loadRequests = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
-			// 
-			// listBox1
-			// 
-			this->listBox1->FormattingEnabled = true;
-			this->listBox1->Location = System::Drawing::Point(27, 25);
-			this->listBox1->Name = L"listBox1";
-			this->listBox1->Size = System::Drawing::Size(185, 446);
-			this->listBox1->TabIndex = 0;
 			// 
 			// label1
 			// 
@@ -162,25 +169,25 @@ namespace CBVTDMVNS {
 			this->label1->TabIndex = 1;
 			this->label1->Text = L"Travel Requests";
 			// 
-			// button1
+			// approve
 			// 
-			this->button1->Location = System::Drawing::Point(870, 448);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 23);
-			this->button1->TabIndex = 2;
-			this->button1->Text = L"Approve";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &CBVTDMV::button1_Click);
+			this->approve->Location = System::Drawing::Point(870, 448);
+			this->approve->Name = L"approve";
+			this->approve->Size = System::Drawing::Size(75, 23);
+			this->approve->TabIndex = 2;
+			this->approve->Text = L"Approve";
+			this->approve->UseVisualStyleBackColor = true;
+			this->approve->Click += gcnew System::EventHandler(this, &CBVTDMV::approve_Click);
 			// 
-			// button2
+			// reject
 			// 
-			this->button2->Location = System::Drawing::Point(951, 448);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(75, 23);
-			this->button2->TabIndex = 3;
-			this->button2->Text = L"Reject";
-			this->button2->UseVisualStyleBackColor = true;
-			this->button2->Click += gcnew System::EventHandler(this, &CBVTDMV::button2_Click);
+			this->reject->Location = System::Drawing::Point(951, 448);
+			this->reject->Name = L"reject";
+			this->reject->Size = System::Drawing::Size(75, 23);
+			this->reject->TabIndex = 3;
+			this->reject->Text = L"Reject";
+			this->reject->UseVisualStyleBackColor = true;
+			this->reject->Click += gcnew System::EventHandler(this, &CBVTDMV::reject_Click);
 			// 
 			// textBox1
 			// 
@@ -284,7 +291,6 @@ namespace CBVTDMVNS {
 			this->label7->Size = System::Drawing::Size(58, 13);
 			this->label7->TabIndex = 16;
 			this->label7->Text = L"Last Name";
-			this->label7->Click += gcnew System::EventHandler(this, &CBVTDMV::label7_Click);
 			// 
 			// label8
 			// 
@@ -303,7 +309,6 @@ namespace CBVTDMVNS {
 			this->label9->Size = System::Drawing::Size(97, 13);
 			this->label9->TabIndex = 18;
 			this->label9->Text = L"Vehicle Information";
-			this->label9->Click += gcnew System::EventHandler(this, &CBVTDMV::label9_Click);
 			// 
 			// label12
 			// 
@@ -412,15 +417,6 @@ namespace CBVTDMVNS {
 			this->textBox15->Size = System::Drawing::Size(118, 20);
 			this->textBox15->TabIndex = 36;
 			// 
-			// button3
-			// 
-			this->button3->Location = System::Drawing::Point(684, 21);
-			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(141, 23);
-			this->button3->TabIndex = 37;
-			this->button3->Text = L"Search for Matching VIN";
-			this->button3->UseVisualStyleBackColor = true;
-			// 
 			// statusStrip1
 			// 
 			this->statusStrip1->Location = System::Drawing::Point(0, 477);
@@ -438,13 +434,13 @@ namespace CBVTDMVNS {
 			this->label20->TabIndex = 40;
 			this->label20->Text = L"Personal Information";
 			// 
-			// richTextBox1
+			// authorizedAccounts
 			// 
-			this->richTextBox1->Location = System::Drawing::Point(684, 50);
-			this->richTextBox1->Name = L"richTextBox1";
-			this->richTextBox1->Size = System::Drawing::Size(323, 392);
-			this->richTextBox1->TabIndex = 41;
-			this->richTextBox1->Text = L"This is a placeholder for potentially displaying the information found in the DB,"
+			this->authorizedAccounts->Location = System::Drawing::Point(684, 24);
+			this->authorizedAccounts->Name = L"authorizedAccounts";
+			this->authorizedAccounts->Size = System::Drawing::Size(323, 416);
+			this->authorizedAccounts->TabIndex = 41;
+			this->authorizedAccounts->Text = L"This is a placeholder for potentially displaying the information found in the DB,"
 				L" there is probably a better way to do this but I am lazy";
 			// 
 			// dateTimePicker2
@@ -495,21 +491,51 @@ namespace CBVTDMVNS {
 			this->maskedTextBox1->Size = System::Drawing::Size(100, 20);
 			this->maskedTextBox1->TabIndex = 91;
 			// 
+			// loadAuthroized
+			// 
+			this->loadAuthroized->Location = System::Drawing::Point(684, 449);
+			this->loadAuthroized->Name = L"loadAuthroized";
+			this->loadAuthroized->Size = System::Drawing::Size(152, 23);
+			this->loadAuthroized->TabIndex = 92;
+			this->loadAuthroized->Text = L"Load Authroized";
+			this->loadAuthroized->UseVisualStyleBackColor = true;
+			this->loadAuthroized->Click += gcnew System::EventHandler(this, &CBVTDMV::loadAuthroized_Click);
+			// 
+			// clientInput
+			// 
+			this->clientInput->Location = System::Drawing::Point(27, 24);
+			this->clientInput->Name = L"clientInput";
+			this->clientInput->Size = System::Drawing::Size(214, 421);
+			this->clientInput->TabIndex = 93;
+			this->clientInput->Text = L"";
+			// 
+			// loadRequests
+			// 
+			this->loadRequests->Location = System::Drawing::Point(27, 449);
+			this->loadRequests->Name = L"loadRequests";
+			this->loadRequests->Size = System::Drawing::Size(129, 23);
+			this->loadRequests->TabIndex = 94;
+			this->loadRequests->Text = L"Load Requests";
+			this->loadRequests->UseVisualStyleBackColor = true;
+			this->loadRequests->Click += gcnew System::EventHandler(this, &CBVTDMV::loadRequests_Click);
+			// 
 			// CBVTDMV
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1040, 499);
+			this->Controls->Add(this->loadRequests);
+			this->Controls->Add(this->clientInput);
+			this->Controls->Add(this->loadAuthroized);
 			this->Controls->Add(this->maskedTextBox1);
 			this->Controls->Add(this->zip);
 			this->Controls->Add(this->dateTimePicker2);
 			this->Controls->Add(this->dateTimePicker1);
 			this->Controls->Add(this->label11);
 			this->Controls->Add(this->label10);
-			this->Controls->Add(this->richTextBox1);
+			this->Controls->Add(this->authorizedAccounts);
 			this->Controls->Add(this->label20);
 			this->Controls->Add(this->statusStrip1);
-			this->Controls->Add(this->button3);
 			this->Controls->Add(this->textBox15);
 			this->Controls->Add(this->textBox14);
 			this->Controls->Add(this->textBox10);
@@ -538,10 +564,9 @@ namespace CBVTDMVNS {
 			this->Controls->Add(this->textBox3);
 			this->Controls->Add(this->textBox2);
 			this->Controls->Add(this->textBox1);
-			this->Controls->Add(this->button2);
-			this->Controls->Add(this->button1);
+			this->Controls->Add(this->reject);
+			this->Controls->Add(this->approve);
 			this->Controls->Add(this->label1);
-			this->Controls->Add(this->listBox1);
 			this->Name = L"CBVTDMV";
 			this->Text = L"CBVT DMV System";
 			this->ResumeLayout(false);
@@ -549,15 +574,63 @@ namespace CBVTDMVNS {
 
 		}
 #pragma endregion
-	private: System::Void listBox1_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
+	private: System::Void reject_Click(System::Object^  sender, System::EventArgs^  e) {
+				 FILE* fp = fopen(CLIENT_INPUT_FILE, "rb");
+				 rapidjson::Document readDoc;
+				 char readBuffer[65536];
+				 rapidjson::FileReadStream instream(fp, readBuffer, sizeof(readBuffer));
+				 readDoc.ParseStream(instream);
+				 fclose(fp);
+				 readDoc["verified_dmv"] = false;
+				 FILE* writeFile = fopen(CLIENT_INPUT_FILE, "wb");
+				 rapidjson::GenericStringBuffer< rapidjson::UTF8<> > buffer;
+				 rapidjson::Writer<rapidjson::GenericStringBuffer< rapidjson::UTF8<> > > writer(buffer);
+				 readDoc.Accept(writer);
+				 const char* str = buffer.GetString();
+				 fprintf(writeFile, "%s", str);
+				 fclose(writeFile);
 	}
-	private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
+	private: System::Void approve_Click(System::Object^  sender, System::EventArgs^  e) {
+				 FILE* fp = fopen(CLIENT_INPUT_FILE, "rb");
+				 rapidjson::Document readDoc;
+				 char readBuffer[65536];
+				 rapidjson::FileReadStream instream(fp, readBuffer, sizeof(readBuffer));
+				 readDoc.ParseStream(instream);
+				 fclose(fp);
+				 readDoc["verified_dmv"] = true;
+				 FILE* writeFile = fopen(CLIENT_INPUT_FILE, "wb");
+				 rapidjson::GenericStringBuffer< rapidjson::UTF8<> > buffer;
+				 rapidjson::Writer<rapidjson::GenericStringBuffer< rapidjson::UTF8<> > > writer(buffer);
+				 readDoc.Accept(writer);
+				 const char* str = buffer.GetString();
+				 fprintf(writeFile, "%s", str);
+				 fclose(writeFile);
 	}
-	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-	}
-private: System::Void label7_Click(System::Object^  sender, System::EventArgs^  e) {
+private: System::Void loadAuthroized_Click(System::Object^  sender, System::EventArgs^  e) {
+			 FILE* fp = fopen(AUTHORIZED_DMV, "rb");
+			 rapidjson::Document readDoc;
+			 char readBuffer[65536];
+			 rapidjson::FileReadStream instream(fp, readBuffer, sizeof(readBuffer));
+			 readDoc.ParseStream(instream);
+			 fclose(fp);
+			 rapidjson::StringBuffer buffer;
+			 rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+			 readDoc.Accept(writer);
+			 String^ myStr = gcnew String(buffer.GetString());
+			 authorizedAccounts->Text = myStr;
 }
-private: System::Void label9_Click(System::Object^  sender, System::EventArgs^  e) {
+private: System::Void loadRequests_Click(System::Object^  sender, System::EventArgs^  e) {
+			 FILE* fp = fopen(CLIENT_INPUT_FILE, "rb");
+			 rapidjson::Document readDoc;
+			 char readBuffer[65536];
+			 rapidjson::FileReadStream instream(fp, readBuffer, sizeof(readBuffer));
+			 readDoc.ParseStream(instream);
+			 fclose(fp);
+			 rapidjson::StringBuffer buffer;
+			 rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+			 readDoc.Accept(writer);
+			 String^ myStr = gcnew String(buffer.GetString());
+			 clientInput->Text = myStr;
 }
 };
 }

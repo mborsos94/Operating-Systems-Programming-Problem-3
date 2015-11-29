@@ -96,9 +96,11 @@ namespace CBVTBankInsurNS {
 	private: System::Windows::Forms::TextBox^  lastName;
 
 	private: System::Windows::Forms::TextBox^  firstName;
+	private: System::Windows::Forms::Button^  reject;
 
-	private: System::Windows::Forms::Button^  button2;
-	private: System::Windows::Forms::Button^  button1;
+
+	private: System::Windows::Forms::Button^  approve;
+
 	private: System::Windows::Forms::Label^  label1;
 
 	private: System::Windows::Forms::DateTimePicker^  travelStart;
@@ -214,8 +216,8 @@ namespace CBVTBankInsurNS {
 			this->licenseNr = (gcnew System::Windows::Forms::TextBox());
 			this->lastName = (gcnew System::Windows::Forms::TextBox());
 			this->firstName = (gcnew System::Windows::Forms::TextBox());
-			this->button2 = (gcnew System::Windows::Forms::Button());
-			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->reject = (gcnew System::Windows::Forms::Button());
+			this->approve = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->travelStart = (gcnew System::Windows::Forms::DateTimePicker());
 			this->travelEnd = (gcnew System::Windows::Forms::DateTimePicker());
@@ -507,23 +509,25 @@ namespace CBVTBankInsurNS {
 			this->firstName->Size = System::Drawing::Size(153, 20);
 			this->firstName->TabIndex = 46;
 			// 
-			// button2
+			// reject
 			// 
-			this->button2->Location = System::Drawing::Point(951, 443);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(75, 23);
-			this->button2->TabIndex = 45;
-			this->button2->Text = L"Reject";
-			this->button2->UseVisualStyleBackColor = true;
+			this->reject->Location = System::Drawing::Point(951, 443);
+			this->reject->Name = L"reject";
+			this->reject->Size = System::Drawing::Size(75, 23);
+			this->reject->TabIndex = 45;
+			this->reject->Text = L"Reject";
+			this->reject->UseVisualStyleBackColor = true;
+			this->reject->Click += gcnew System::EventHandler(this, &CBVTBankInsurance::reject_Click);
 			// 
-			// button1
+			// approve
 			// 
-			this->button1->Location = System::Drawing::Point(870, 443);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 23);
-			this->button1->TabIndex = 44;
-			this->button1->Text = L"Approve";
-			this->button1->UseVisualStyleBackColor = true;
+			this->approve->Location = System::Drawing::Point(870, 443);
+			this->approve->Name = L"approve";
+			this->approve->Size = System::Drawing::Size(75, 23);
+			this->approve->TabIndex = 44;
+			this->approve->Text = L"Approve";
+			this->approve->UseVisualStyleBackColor = true;
+			this->approve->Click += gcnew System::EventHandler(this, &CBVTBankInsurance::approve_Click);
 			// 
 			// label1
 			// 
@@ -709,8 +713,8 @@ namespace CBVTBankInsurNS {
 			this->Controls->Add(this->licenseNr);
 			this->Controls->Add(this->lastName);
 			this->Controls->Add(this->firstName);
-			this->Controls->Add(this->button2);
-			this->Controls->Add(this->button1);
+			this->Controls->Add(this->reject);
+			this->Controls->Add(this->approve);
 			this->Controls->Add(this->label1);
 			this->Name = L"CBVTBankInsurance";
 			this->Text = L"CBVT Bank / Insurance System";
@@ -746,6 +750,38 @@ private: System::Void loadRequests_Click(System::Object^  sender, System::EventA
 		readDoc.Accept(writer);
 		String^ myStr = gcnew String(buffer.GetString());
 		clientInput->Text = myStr;
+}
+private: System::Void approve_Click(System::Object^  sender, System::EventArgs^  e) {
+			 FILE* fp = fopen(CLIENT_INPUT_FILE, "rb");
+			 rapidjson::Document readDoc;
+			 char readBuffer[65536];
+			 rapidjson::FileReadStream instream(fp, readBuffer, sizeof(readBuffer));
+			 readDoc.ParseStream(instream);
+			 fclose(fp);
+			 readDoc["verified_bank"] = true;
+			 FILE* writeFile = fopen(CLIENT_INPUT_FILE, "wb");
+			 rapidjson::GenericStringBuffer< rapidjson::UTF8<> > buffer;
+			 rapidjson::Writer<rapidjson::GenericStringBuffer< rapidjson::UTF8<> > > writer(buffer);
+			 readDoc.Accept(writer);
+			 const char* str = buffer.GetString();
+			 fprintf(writeFile, "%s", str);
+			 fclose(writeFile);
+}
+private: System::Void reject_Click(System::Object^  sender, System::EventArgs^  e) {
+			 FILE* fp = fopen(CLIENT_INPUT_FILE, "rb");
+			 rapidjson::Document readDoc;
+			 char readBuffer[65536];
+			 rapidjson::FileReadStream instream(fp, readBuffer, sizeof(readBuffer));
+			 readDoc.ParseStream(instream);
+			 fclose(fp);
+			 readDoc["verified_bank"] = false;
+			 FILE* writeFile = fopen(CLIENT_INPUT_FILE, "wb");
+			 rapidjson::GenericStringBuffer< rapidjson::UTF8<> > buffer;
+			 rapidjson::Writer<rapidjson::GenericStringBuffer< rapidjson::UTF8<> > > writer(buffer);
+			 readDoc.Accept(writer);
+			 const char* str = buffer.GetString();
+			 fprintf(writeFile, "%s", str);
+			 fclose(writeFile);
 }
 };
 }

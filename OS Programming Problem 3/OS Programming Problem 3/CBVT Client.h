@@ -9,6 +9,7 @@
 #include "rapidjson/writer.h"
 #include "rapidjson/stringbuffer.h"
 #include "rapidjson/filewritestream.h"
+#include "rapidjson/rapidjson.h"
 
 
 namespace CBVTClientNS {
@@ -706,9 +707,6 @@ private: System::Windows::Forms::MaskedTextBox^  zip;
 				 rapidjson::Document *newDoc = new rapidjson::Document;
 				 
 				 // Parse an empty JSON objext to initialize the document.
-				 const char* json = "{   }";
-				 bool fileAlreadyPopulated = false;
-				 newDoc->Parse(json);
 				 newDoc->SetObject();
 				 if (!clientPhoto->Image)
 					 missingInfo = missingInfo + " Photograph,";
@@ -718,7 +716,7 @@ private: System::Windows::Forms::MaskedTextBox^  zip;
 				 else {
 					 rapidjson::Value newValue;
 					 std::string unmanaged = msclr::interop::marshal_as<std::string>(firstName->Text);
-					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
+					 newValue = rapidjson::StringRef(unmanaged.c_str()), unmanaged.length();
 					 newDoc->AddMember("first_name", newValue, newDoc->GetAllocator());
 				 }
 
@@ -880,10 +878,10 @@ private: System::Windows::Forms::MaskedTextBox^  zip;
 				 } 
 				 else {
 					 rapidjson::Value newValue, newValue2;
-					 std::string unmanaged = msclr::interop::marshal_as<std::string>(travelEnd->Value.ToLongDateString());
+					 std::string unmanaged = msclr::interop::marshal_as<std::string>(travelEnd->Value.ToShortDateString());
 					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
 					 newDoc->AddMember("travel_end", newValue, newDoc->GetAllocator());
-					 std::string travel_start = msclr::interop::marshal_as<std::string>(travelStart->Value.ToLongDateString());
+					 std::string travel_start = msclr::interop::marshal_as<std::string>(travelStart->Value.ToShortDateString());
 					 newValue2.SetString(travel_start.c_str(), travel_start.length());
 					 newDoc->AddMember("travel_start", newValue2, newDoc->GetAllocator());
 				 }
@@ -893,12 +891,12 @@ private: System::Windows::Forms::MaskedTextBox^  zip;
 				 newDoc->AddMember("dmv_verified", verified, newDoc->GetAllocator());
 				 newDoc->AddMember("bank_verified", verified2, newDoc->GetAllocator());
 				 FILE* fp = fopen(CLIENT_INPUT_FILE, "wb");
-				 char writeBuffer[65536];
-				 rapidjson::FileWriteStream os(fp, writeBuffer, sizeof(writeBuffer));
-				 rapidjson::Writer<rapidjson::FileWriteStream> writer(os);
+				 rapidjson::GenericStringBuffer< rapidjson::UTF8<> > buffer;
+				 rapidjson::Writer<rapidjson::GenericStringBuffer< rapidjson::UTF8<> > > writer(buffer);
 				 newDoc->Accept(writer);
+				 const char* str = buffer.GetString();
+				 fprintf(fp, "%s", str);
 				 fclose(fp);
-					 
 			 
 			 Client aClient;
 			 MessageBox::Show("Request submitted");
