@@ -100,7 +100,7 @@ namespace CBVTBankInsurNS {
 	private: System::Windows::Forms::Button^  button2;
 	private: System::Windows::Forms::Button^  button1;
 	private: System::Windows::Forms::Label^  label1;
-	private: System::Windows::Forms::ListBox^  listBox1;
+
 	private: System::Windows::Forms::DateTimePicker^  travelStart;
 	private: System::Windows::Forms::DateTimePicker^  travelEnd;
 
@@ -116,6 +116,8 @@ namespace CBVTBankInsurNS {
 	private: System::Windows::Forms::Label^  insurNameLbl;
 	private: System::Windows::Forms::TextBox^  insurName;
 	private: System::Windows::Forms::Button^  loadAuthorized;
+	private: System::Windows::Forms::Button^  loadRequests;
+	private: System::Windows::Forms::RichTextBox^  clientInput;
 
 
 	protected:
@@ -215,7 +217,6 @@ namespace CBVTBankInsurNS {
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->listBox1 = (gcnew System::Windows::Forms::ListBox());
 			this->travelStart = (gcnew System::Windows::Forms::DateTimePicker());
 			this->travelEnd = (gcnew System::Windows::Forms::DateTimePicker());
 			this->zip = (gcnew System::Windows::Forms::MaskedTextBox());
@@ -229,6 +230,8 @@ namespace CBVTBankInsurNS {
 			this->insurNameLbl = (gcnew System::Windows::Forms::Label());
 			this->insurName = (gcnew System::Windows::Forms::TextBox());
 			this->loadAuthorized = (gcnew System::Windows::Forms::Button());
+			this->loadRequests = (gcnew System::Windows::Forms::Button());
+			this->clientInput = (gcnew System::Windows::Forms::RichTextBox());
 			this->SuspendLayout();
 			// 
 			// authorizedAccounts
@@ -531,15 +534,6 @@ namespace CBVTBankInsurNS {
 			this->label1->TabIndex = 43;
 			this->label1->Text = L"Travel Requests";
 			// 
-			// listBox1
-			// 
-			this->listBox1->FormattingEnabled = true;
-			this->listBox1->Location = System::Drawing::Point(27, 20);
-			this->listBox1->Name = L"listBox1";
-			this->listBox1->Size = System::Drawing::Size(185, 446);
-			this->listBox1->TabIndex = 42;
-			this->listBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &CBVTBankInsurance::listBox1_SelectedIndexChanged);
-			// 
 			// travelStart
 			// 
 			this->travelStart->Location = System::Drawing::Point(313, 265);
@@ -644,11 +638,31 @@ namespace CBVTBankInsurNS {
 			this->loadAuthorized->UseVisualStyleBackColor = true;
 			this->loadAuthorized->Click += gcnew System::EventHandler(this, &CBVTBankInsurance::loadAuthorized_Click);
 			// 
+			// loadRequests
+			// 
+			this->loadRequests->Location = System::Drawing::Point(27, 443);
+			this->loadRequests->Name = L"loadRequests";
+			this->loadRequests->Size = System::Drawing::Size(102, 23);
+			this->loadRequests->TabIndex = 102;
+			this->loadRequests->Text = L"Load Requests";
+			this->loadRequests->UseVisualStyleBackColor = true;
+			this->loadRequests->Click += gcnew System::EventHandler(this, &CBVTBankInsurance::loadRequests_Click);
+			// 
+			// clientInput
+			// 
+			this->clientInput->Location = System::Drawing::Point(27, 20);
+			this->clientInput->Name = L"clientInput";
+			this->clientInput->Size = System::Drawing::Size(214, 417);
+			this->clientInput->TabIndex = 103;
+			this->clientInput->Text = L"";
+			// 
 			// CBVTBankInsurance
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1048, 503);
+			this->Controls->Add(this->clientInput);
+			this->Controls->Add(this->loadRequests);
 			this->Controls->Add(this->loadAuthorized);
 			this->Controls->Add(this->policyNrLbl);
 			this->Controls->Add(this->policyNr);
@@ -698,7 +712,6 @@ namespace CBVTBankInsurNS {
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->label1);
-			this->Controls->Add(this->listBox1);
 			this->Name = L"CBVTBankInsurance";
 			this->Text = L"CBVT Bank / Insurance System";
 			this->ResumeLayout(false);
@@ -710,13 +723,29 @@ namespace CBVTBankInsurNS {
 	}
 	private: System::Void loadAuthorized_Click(System::Object^  sender, System::EventArgs^  e) {
 		FILE* fp = fopen(AUTHORIZED_BANK, "rb");
-		rapidjson::Document *readDoc;
+		rapidjson::Document readDoc;
 		char readBuffer[65536];
 		rapidjson::FileReadStream instream(fp, readBuffer, sizeof(readBuffer));		
-		readDoc->ParseStream(instream);
+		readDoc.ParseStream(instream);
 		fclose(fp);
-		String^ myStr = gcnew String(readDoc->GetString());
+		rapidjson::StringBuffer buffer;
+		rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+		readDoc.Accept(writer);
+		String^ myStr = gcnew String(buffer.GetString());
 		authorizedAccounts->Text = myStr;
 	}
+private: System::Void loadRequests_Click(System::Object^  sender, System::EventArgs^  e) {
+		FILE* fp = fopen(CLIENT_INPUT_FILE, "rb");
+		rapidjson::Document readDoc;
+		char readBuffer[65536];
+		rapidjson::FileReadStream instream(fp, readBuffer, sizeof(readBuffer));
+		readDoc.ParseStream(instream);
+		fclose(fp);
+		rapidjson::StringBuffer buffer;
+		rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+		readDoc.Accept(writer);
+		String^ myStr = gcnew String(buffer.GetString());
+		clientInput->Text = myStr;
+}
 };
 }
