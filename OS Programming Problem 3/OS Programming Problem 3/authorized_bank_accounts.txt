@@ -1,1 +1,2 @@
-[{"first_name":"Tyler", "last_name":"Wiersing", "address": "125 Glenwood Dr", "city":"Walled Lake", "state":"Michigan", "bank_name": "DFCU", "loan_number": "123", "insurance_name": "AAA", "policy_number":"321"}, {"first_name":"Marshall", "last_name":"Borsos"}]
+[{"first_name":"Tyler", "last_name":"Wiersing", "address": "125 Glenwood Dr", "city":"Walled Lake", "state":"Michigan", "bank_name": "DFCU", "loan_number": "123", "insurance_name": "AAA", "policy_number":"321"}, 
+{"first_name":"Marshall", "last_name":"Borsos", "address": "4266 Lotus Dr", "city":"Waterford", "state":"Michigan", "bank_name": "Genisys CU", "loan_number": "124", "insurance_name": "State Farm", "policy_number":"421"}]
