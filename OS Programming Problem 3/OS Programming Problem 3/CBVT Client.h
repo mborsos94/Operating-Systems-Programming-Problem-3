@@ -705,7 +705,7 @@ private: System::Windows::Forms::MaskedTextBox^  zip;
 				 //Check if fields are filled with information
 
 				 rapidjson::Document *newDoc = new rapidjson::Document;
-				 
+				 string prepending = "_"; // resolve issue of first character set to null
 				 // Parse an empty JSON objext to initialize the document.
 				 newDoc->SetObject();
 				 if (!clientPhoto->Image)
@@ -716,6 +716,7 @@ private: System::Windows::Forms::MaskedTextBox^  zip;
 				 else {
 					 rapidjson::Value newValue;
 					 std::string unmanaged = msclr::interop::marshal_as<std::string>(firstName->Text);
+					 unmanaged.insert(0, prepending);
 					 newValue = rapidjson::StringRef(unmanaged.c_str()), unmanaged.length();
 					 newDoc->AddMember("first_name", newValue, newDoc->GetAllocator());
 				 }
@@ -725,6 +726,7 @@ private: System::Windows::Forms::MaskedTextBox^  zip;
 				 else {
 					 rapidjson::Value newValue;
 					 std::string unmanaged = msclr::interop::marshal_as<std::string>(lastName->Text);
+					 unmanaged.insert(0, prepending);
 					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
 					 newDoc->AddMember("last_name", newValue, newDoc->GetAllocator());
 				 }
@@ -734,6 +736,7 @@ private: System::Windows::Forms::MaskedTextBox^  zip;
 				 else {
 					 rapidjson::Value newValue;
 					 std::string unmanaged = msclr::interop::marshal_as<std::string>(licenseNr->Text);
+					 unmanaged.insert(0, prepending);
 					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
 					 newDoc->AddMember("license_number", newValue, newDoc->GetAllocator());
 				 }
@@ -743,6 +746,7 @@ private: System::Windows::Forms::MaskedTextBox^  zip;
 				 else {
 					 rapidjson::Value newValue;
 					 std::string unmanaged = msclr::interop::marshal_as<std::string>(passportNr->Text);
+					 unmanaged.insert(0, prepending);
 					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
 					 newDoc->AddMember("passport_number", newValue, newDoc->GetAllocator());
 				 }
@@ -752,6 +756,7 @@ private: System::Windows::Forms::MaskedTextBox^  zip;
 				 else {
 					 rapidjson::Value newValue;
 					 std::string unmanaged = msclr::interop::marshal_as<std::string>(address->Text);
+					 unmanaged.insert(0, prepending);
 					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
 					 newDoc->AddMember("address", newValue, newDoc->GetAllocator());
 				 }
@@ -761,6 +766,7 @@ private: System::Windows::Forms::MaskedTextBox^  zip;
 				 else {
 					 rapidjson::Value newValue;
 					 std::string unmanaged = msclr::interop::marshal_as<std::string>(city->Text);
+					 unmanaged.insert(0, prepending);
 					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
 					 newDoc->AddMember("city", newValue, newDoc->GetAllocator());
 				 }
@@ -770,6 +776,7 @@ private: System::Windows::Forms::MaskedTextBox^  zip;
 				 else {
 					 rapidjson::Value newValue;
 					 std::string unmanaged = msclr::interop::marshal_as<std::string>(stateProvince->Text);
+					 unmanaged.insert(0, prepending);
 					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
 					 newDoc->AddMember("state_province", newValue, newDoc->GetAllocator());
 				 }
@@ -779,6 +786,7 @@ private: System::Windows::Forms::MaskedTextBox^  zip;
 				 else {
 					 rapidjson::Value newValue;
 					 std::string unmanaged = msclr::interop::marshal_as<std::string>(zip->Text);
+					 unmanaged.insert(0, prepending);
 					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
 					 newDoc->AddMember("zip", newValue, newDoc->GetAllocator());
 				 }
@@ -788,6 +796,7 @@ private: System::Windows::Forms::MaskedTextBox^  zip;
 				 else {
 					 rapidjson::Value newValue;
 					 std::string unmanaged = msclr::interop::marshal_as<std::string>(registrationNr->Text);
+					 unmanaged.insert(0, prepending);
 					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
 					 newDoc->AddMember("registration_number", newValue, newDoc->GetAllocator());
 				 }
@@ -797,6 +806,7 @@ private: System::Windows::Forms::MaskedTextBox^  zip;
 				 else {
 					 rapidjson::Value newValue;
 					 std::string unmanaged = msclr::interop::marshal_as<std::string>(vinNr->Text);
+					 unmanaged.insert(0, prepending);
 					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
 					 newDoc->AddMember("vin_number", newValue, newDoc->GetAllocator());
 				 }
@@ -806,6 +816,7 @@ private: System::Windows::Forms::MaskedTextBox^  zip;
 				 else {
 					 rapidjson::Value newValue;
 					 std::string unmanaged = msclr::interop::marshal_as<std::string>(carMake->Text);
+					 unmanaged.insert(0, prepending);
 					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
 					 newDoc->AddMember("car_make", newValue, newDoc->GetAllocator());
 				 }
@@ -815,6 +826,7 @@ private: System::Windows::Forms::MaskedTextBox^  zip;
 				 else {
 					 rapidjson::Value newValue;
 					 std::string unmanaged = msclr::interop::marshal_as<std::string>(carModel->Text);
+					 unmanaged.insert(0, prepending);
 					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
 					 newDoc->AddMember("car_model", newValue, newDoc->GetAllocator());
 				 }
@@ -824,7 +836,8 @@ private: System::Windows::Forms::MaskedTextBox^  zip;
 				 else {
 					 rapidjson::Value newValue;
 					 std::string unmanaged = msclr::interop::marshal_as<std::string>(carColor->Text);
-					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
+					 unmanaged.insert(0, prepending);
+					 newValue.SetString(unmanaged.c_str(), unmanaged.length() + 1);
 					 newDoc->AddMember("car_color", newValue, newDoc->GetAllocator());
 				 }
 
@@ -833,6 +846,7 @@ private: System::Windows::Forms::MaskedTextBox^  zip;
 				 else {
 					 rapidjson::Value newValue;
 					 std::string unmanaged = msclr::interop::marshal_as<std::string>(bankName->Text);
+					 unmanaged.insert(0, prepending);
 					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
 					 newDoc->AddMember("bank_name", newValue, newDoc->GetAllocator());
 				 }
@@ -842,6 +856,7 @@ private: System::Windows::Forms::MaskedTextBox^  zip;
 				 else {
 					 rapidjson::Value newValue;
 					 std::string unmanaged = msclr::interop::marshal_as<std::string>(loanNr->Text);
+					 unmanaged.insert(0, prepending);
 					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
 					 newDoc->AddMember("loan_number", newValue, newDoc->GetAllocator());
 				 }
@@ -851,6 +866,7 @@ private: System::Windows::Forms::MaskedTextBox^  zip;
 				 else {
 					 rapidjson::Value newValue;
 					 std::string unmanaged = msclr::interop::marshal_as<std::string>(insurName->Text);
+					 unmanaged.insert(0, prepending);
 					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
 					 newDoc->AddMember("insurance_name", newValue, newDoc->GetAllocator());
 				 }
@@ -860,6 +876,7 @@ private: System::Windows::Forms::MaskedTextBox^  zip;
 				 else {
 					 rapidjson::Value newValue;
 					 std::string unmanaged = msclr::interop::marshal_as<std::string>(policyNr->Text);
+					 unmanaged.insert(0, prepending);
 					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
 					 newDoc->AddMember("policy_number", newValue, newDoc->GetAllocator());
 				 }
@@ -879,9 +896,11 @@ private: System::Windows::Forms::MaskedTextBox^  zip;
 				 else {
 					 rapidjson::Value newValue, newValue2;
 					 std::string unmanaged = msclr::interop::marshal_as<std::string>(travelEnd->Value.ToShortDateString());
+					 unmanaged.insert(0, prepending);
 					 newValue.SetString(unmanaged.c_str(), unmanaged.length());
 					 newDoc->AddMember("travel_end", newValue, newDoc->GetAllocator());
 					 std::string travel_start = msclr::interop::marshal_as<std::string>(travelStart->Value.ToShortDateString());
+					 unmanaged.insert(0, prepending);
 					 newValue2.SetString(travel_start.c_str(), travel_start.length());
 					 newDoc->AddMember("travel_start", newValue2, newDoc->GetAllocator());
 				 }
