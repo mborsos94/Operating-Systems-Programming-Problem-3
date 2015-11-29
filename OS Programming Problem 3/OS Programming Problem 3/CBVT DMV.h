@@ -575,36 +575,38 @@ namespace CBVTDMVNS {
 		}
 #pragma endregion
 	private: System::Void reject_Click(System::Object^  sender, System::EventArgs^  e) {
-				 FILE* fp = fopen(CLIENT_INPUT_FILE, "rb");
+				 FILE* fp = fopen(CLIENT_INPUT_FILE, "r+");
 				 rapidjson::Document readDoc;
 				 char readBuffer[65536];
 				 rapidjson::FileReadStream instream(fp, readBuffer, sizeof(readBuffer));
 				 readDoc.ParseStream(instream);
-				 fclose(fp);
-				 readDoc["verified_dmv"] = false;
-				 FILE* writeFile = fopen(CLIENT_INPUT_FILE, "wb");
+				 rapidjson::Value verifiedDMV;
+				 verifiedDMV.SetBool(false);
+				 readDoc.RemoveMember("verified_dmv");
+				 readDoc.AddMember("verified_dmv", verifiedDMV, readDoc.GetAllocator());
 				 rapidjson::GenericStringBuffer< rapidjson::UTF8<> > buffer;
 				 rapidjson::Writer<rapidjson::GenericStringBuffer< rapidjson::UTF8<> > > writer(buffer);
 				 readDoc.Accept(writer);
 				 const char* str = buffer.GetString();
-				 fprintf(writeFile, "%s", str);
-				 fclose(writeFile);
+				 fprintf(fp, "%s", str);
+				 fclose(fp);
 	}
 	private: System::Void approve_Click(System::Object^  sender, System::EventArgs^  e) {
-				 FILE* fp = fopen(CLIENT_INPUT_FILE, "rb");
+				 FILE* fp = fopen(CLIENT_INPUT_FILE, "r+");
 				 rapidjson::Document readDoc;
 				 char readBuffer[65536];
 				 rapidjson::FileReadStream instream(fp, readBuffer, sizeof(readBuffer));
 				 readDoc.ParseStream(instream);
-				 fclose(fp);
-				 readDoc["verified_dmv"] = true;
-				 FILE* writeFile = fopen(CLIENT_INPUT_FILE, "wb");
+				 rapidjson::Value verifiedDMV;
+				 verifiedDMV.SetBool(true);
+				 readDoc.RemoveMember("verified_dmv");
+				 readDoc.AddMember("verified_dmv", verifiedDMV, readDoc.GetAllocator());
 				 rapidjson::GenericStringBuffer< rapidjson::UTF8<> > buffer;
 				 rapidjson::Writer<rapidjson::GenericStringBuffer< rapidjson::UTF8<> > > writer(buffer);
 				 readDoc.Accept(writer);
 				 const char* str = buffer.GetString();
-				 fprintf(writeFile, "%s", str);
-				 fclose(writeFile);
+				 fprintf(fp, "%s", str);
+				 fclose(fp);
 	}
 private: System::Void loadAuthroized_Click(System::Object^  sender, System::EventArgs^  e) {
 			 FILE* fp = fopen(AUTHORIZED_DMV, "rb");
